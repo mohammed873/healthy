@@ -1,0 +1,263 @@
+body{
+	background-color:#FFF;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+	font-size:16px;
+	line-height:18px;
+	color:#777;
+}
+
+p{
+	margin:0;
+}
+
+a {
+    color: #aa0a5f;
+}
+
+a, a:hover, a:focus{
+	text-decoration: none;
+	outline: 0;
+}
+h1, h2, h3,
+h4, h5, h6 {
+    color: #333;
+	margin:0;
+    font-weight: normal;
+}
+
+h1 { font-size: 28px;}
+h2 { font-size: 24px;}
+h3 { font-size: 18px;}
+h5 { font-size: 16px;}
+h6 { font-size: 14px;}
+
+strong {
+  letter-spacing: 1px;
+}
+
+code {
+  background-color: #ddd;
+  border-radius: 3px;
+  color: #000;
+  font-size: 85%;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+code a {
+    color: #333;
+}
+
+code a:hover {
+    text-decoration: underline;
+}
+
+section p {
+  line-height: 28px;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+.tan {
+  margin-bottom: 10px;
+}
+
+.fifteen{
+    margin-bottom: 15px;
+}
+
+.twenty{
+    margin-bottom: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.title {
+    margin: 50px 0 30px;
+}
+
+.syntaxhighlighter {
+    border: 1px solid #efefef;
+    max-height: 100% !important;
+    padding: 20px 0;
+}
+
+
+.main-content section {
+  margin: 0 5%;
+}
+
+
+.left-sidebar {
+    background-color: #0a0612;
+    float: left;
+    min-height: 100%;
+    width: 18%;
+    position: fixed;
+}
+
+.logo {
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-top: 70px;
+}
+.logo h1{
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.left-nav ul {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.left-nav ul li a {
+    color: #fff;
+    display: block;
+    padding: 10px 35px;
+    -webkit-transition: all 0.3s ease-in 0s;
+       -moz-transition: all 0.3s ease-in 0s;
+        -ms-transition: all 0.3s ease-in 0s;
+         -o-transition: all 0.3s ease-in 0s;
+            transition: all 0.3s ease-in 0s;
+}
+
+.left-nav ul li a:hover, .left-nav ul li .current {
+    background-color: #f84b67;
+    color: #fff;
+}
+
+.doctor_procceses{
+    text-align: center;
+    box-shadow: 0px 0px 10px;
+    background-color: white;
+    padding: 1px !important;
+}
+.doctor_procceses p{
+    font-size: 21px;
+    font-family: auto;
+}
+.doctor_procceses p a{
+    color: #000;
+}
+.doctor_procceses p a:hover{
+    color:blue;
+    text-decoration: underline;
+}
+#admin_logout_btn{
+    width: 100%;
+    background-color: blue;
+    padding: 3%;
+    text-align: center;
+    margin-top: 8%;
+    font-size: 22px;
+    font-family: auto;
+}
+#admin_logout_btn a{
+   color: white;
+}
+.responsive_logo{
+    display: none ;
+}
+.responsive_panel{
+    display: none;
+}
+
+@media screen and (max-width: 1388px) { 
+   .left-sidebar{
+        display: none;
+    }
+    .responsive_logo{
+        display: block;
+    }
+    .responsive_panel{
+        display: block;
+        display: flex;
+        padding: 1%;
+        background-color: black;
+    }
+    .responsive_logo{
+        background-color: black;
+        text-align: center;
+        padding: 1%;
+    }
+    .responsive_logo h1{
+      color: white;
+    }
+    .responsive_doctor_profile{
+        width: 33%;
+        text-align: center;
+    }
+    .responsive_doctor_procceses{ 
+        width: 33%;
+        text-align: center;
+        box-shadow: 0px 0px 10px;
+        background-color: rgb(255, 255, 255);
+        font-family: auto;
+        font-size: 21px;
+    }
+    .responsive_doctor_procceses #inner{ 
+        padding: 2%;
+        margin-top: 37px;
+    }
+    .responsive_doctor_procceses p a{
+        color: #000;
+    }
+    .responsive_doctor_procceses p a:hover{
+        color:blue;
+        text-decoration: underline;
+    }
+    #responsive_admin_logout_btn{
+        background-color: blue;
+        height: 23px;
+        width: 30%;
+        text-align: center;
+        padding: 20px;
+        margin-left: 34px;
+    }
+    #responsive_admin_logout_btn a{
+        color: white;
+        position: relative;
+        top: -15px;
+        font-size: 19px;
+    }
+    .right_body{
+        margin: auto !important;
+        width: 96% !important;
+    }
+    .t_body{
+        font-size: 14px !important;
+    }
+  }
+
+/* adding admin form */
+.big-box li{
+    list-style: none;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
