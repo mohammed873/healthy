@@ -70,11 +70,10 @@ class Users extends DB
         if (empty($user_password)) {
             $error['user_password'] = "password required";
         }
-
         return $error;
     }
 
-        public function login($table, $condition)
+    public function login($table, $condition)
     {
         $conn = $this->connect();
         $sql = "SELECT * FROM $table";

@@ -50,11 +50,11 @@
 		</div>
 		<br>
 		<div class="doctor_procceses">
-		    <p><a href="#">admins</a></p>
-			<p><a href="#">patients</a></p>
+		    <p><a href="#admins">admins</a></p>
+			<p><a href="#patients">patients</a></p>
 			<p><a href="#">add admin</a></p>
-		    <p><a href="#">appointments</a></p>
-	        <p><a href="#">contact messages</a></p>
+		    <p><a href="#appointments">appointments</a></p>
+	        <p><a href="#contact_messages">contact messages</a></p>
 		</div>
 		<div id="admin_logout_btn">
 			<a href="../views/index.php">log out</a>
@@ -78,11 +78,11 @@
 		<br><br>
 		<div class="responsive_doctor_procceses">
 			<div id="inner">
-			    <p><a href="#">admins</a></p>
-				<p><a href="#">patients</a></p>
+			    <p><a href="#admins">admins</a></p>
+				<p><a href="#patients">patients</a></p>
 				<p><a href="#">add admin</a></p>
-				<p><a href="#">appointments</a></p>
-				<p><a href="#">contact messages</a></p>
+				<p><a href="#appointments">appointments</a></p>
+				<p><a href="#contact_messages">contact messages</a></p>
 			</div>
 		</div>
 		<div id="responsive_admin_logout_btn">
@@ -94,7 +94,7 @@
 	<div class="right_body" style="width: 82%;margin-left: 18%;">
      <br><br>
 		<!-- showing admins in a form of a table -->
-	   <div class="col-md-6" style="margin: auto;">
+	   <div class="col-md-6" style="margin: auto;" id="admins">
 			<?php
 				$con = $data->connect();
 				$sql="SELECT * FROM users WHERE user_status = 'admin'";
@@ -133,7 +133,7 @@
 	   <br>
 
 	   <!-- showing users (patients) -->
-		<div class="col-md-6" style="margin: auto;">
+		<div class="col-md-6" style="margin: auto;" id="patients">
 			<?php
 				$con = $data->connect();
 				$sql="SELECT * FROM users WHERE user_status = 'user'";
@@ -224,13 +224,12 @@
 	<br><br>
 
 	<!-- showing all appointement -->
-	<div class="col-md-10" style="margin: auto;">
+	<div class="col-md-10" style="margin: auto;" id="appointments">
         <?php
-            
-            $user_id = $_SESSION['user_id'];
-
+            $doctor_id = $_SESSION['user_id'];
             $con = $data->connect();
-            $sql="SELECT * FROM `appointment`";
+            $sql="SELECT * FROM `appointment` WHERE doctor_id = '$doctor_id'";
+			;
             $stm=$con->prepare($sql);
             $stm->execute();
             $result=$stm->get_result();
@@ -272,6 +271,42 @@
 						   <button type="submit" name="manage" class="btn-danger p-1">manage</button>
 						</form>
 					</td>
+				<?php } ?>
+			</tbody>
+          </table>
+	</div>
+	<!-- showing all Contact messages -->
+	<div class="col-md-10" style="margin: auto;" id="contact_messages">
+        <?php
+            
+            $user_id = $_SESSION['user_id'];
+
+            $con = $data->connect();
+            $sql="SELECT * FROM `contact`";
+            $stm=$con->prepare($sql);
+            $stm->execute();
+            $result=$stm->get_result();
+        ?>
+			<h4 class="text-center bg-success p-2 text-white">contact messages table</h4>
+			<br>
+		  <table class="table mr-4 bg-warning">
+			<thead class="thead-dark">
+				<tr>
+                    <th>Message Id</th>
+                    <th>User Id</th>
+					<th>User Name</th>
+					<th>User Email</th>
+                    <th>Message</th>
+				</tr>
+			</thead>
+			<tbody class="t_body">
+			<?php while($row=$result->fetch_assoc()){ ?>
+				<tr>
+                    <td><?=$row['contact_id'];?></td>
+					<td><?=$row['user_id'];?></td>
+					<td><?=$row['firstname'];?></td>
+                    <td><?=$row['email'];?></td>
+                    <td><?=$row['comment'];?></td>
 				<?php } ?>
 			</tbody>
           </table>

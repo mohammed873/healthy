@@ -1,6 +1,6 @@
 <?php
-    
-    include_once ('../classes/appointement_class.php');
+
+    include_once('../classes/appointement_class.php');
 
     $appointement = new Appointement();
 
@@ -17,18 +17,18 @@
         $time= $_POST["time"];
         $message= $_POST["message"];
         $appointement_status = $_POST["appointement_status"];
+        $doctor_id = $_POST["doctor_id"];
 
-        $error = $appointement->appointement_validation($user_name,$user_email,$service_type,$time,$message,$error);
-
+        $error = $appointement->appointement_validation($user_name,$user_email,$service_type,$time,$message,$doctor_id,$error);
+       
         if(count($error) === 0){
-            $appointement->make_appointement($user_id,$user_name,$user_email, $service_type,$time,$message,$appointement_status);
+            $appointement->make_appointement($user_id,$doctor_id,$user_name,$user_email, $service_type,$time,$message,$appointement_status);
 
             //sending appointement confiramation
             $_SESSION['message'] = "your appointement made successfuly <a href = 'profile.php'>check ur profile</a>";
             //empty the inputs fields after submitting
             $user_name = '';
             $user_email = '';
-
         }
     }
 

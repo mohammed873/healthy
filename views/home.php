@@ -1,5 +1,6 @@
 <?php
   include_once ('../controllers/appointement.php');
+  $conn = new Appointement();
 ?>
 <!doctype html>
 <html lang="en">
@@ -322,9 +323,22 @@
                                 <div class="form-group col-md-12">
                                     <textarea class="form-control" id="Textarea"  name="message"placeholder="Your Note "></textarea>
                                 </div>
-                                <input type="hidden" name="appointement_status" value="On Hold">; 
-                            </div>
-                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2" >make appointmet</button>
+                                     <?php  
+                                        $con = $conn->connect();
+                                        $sql="SELECT * FROM users WHERE user_status = 'admin'";
+                                        $stm=$con->prepare($sql);
+                                        $stm->execute();
+                                        $result=$stm->get_result();
+                                    ?>
+                                <select id="doctor_option" class="bg-warning btn-block p-2 " name="doctor_id">
+                                        <option value="Chose a Doctor">Chose a Doctor</option>
+                                    <?php while($row=$result->fetch_assoc()){ ?>
+                                        <option value="<?=$row['user_id'];?>"><?=$row['user_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                                <input type="hidden" name="appointement_status" value="On Hold">
+                            </div><br>
+                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2"  id="make-appointement">make appointmet</button>
                         </form>
 
                         <!-- end -->
@@ -552,6 +566,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 </body>
+
+<script>
+    // $(document).ready(function(){
+    //     $("#make-appointement").load("http://localhost/done/views/home.php#appointment_section",function(){
+    //         window.scrollBy(900, 900);
+    //     });
+    // });
+
+    // function scrollWin() {
+    //      window.scrollBy(900, 900);
+    // }
+</script>
 </html>
 
 

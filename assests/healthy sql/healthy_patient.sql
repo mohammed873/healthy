@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2020 at 07:10 PM
+-- Generation Time: Jul 26, 2020 at 06:09 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `appointment` (
   `appointment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
   `user_name` varchar(100) NOT NULL,
   `user_email` varchar(100) NOT NULL,
   `service_type` varchar(250) NOT NULL,
@@ -42,21 +43,18 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`appointment_id`, `user_id`, `user_name`, `user_email`, `service_type`, `time`, `message`, `appointement_status`) VALUES
-(1, 1, 'mohammed', 'melhachimi514@gmail.com', 'Nursing care', '12PM TO 2PM', 'test', 'Accepted'),
-(2, 7, 'ahmed', 'ahmed@gmail.com', 'Nursing care', '6PM TO 8PM', 'hi doc', 'Decline'),
-(3, 1, 'mohammed', 'melhachimi514@gmail.com', 'Nursing care', '10 AM TO 12PM', 'hi doc', 'Declined'),
-(4, 1, '', '', '1', '', '', 'On Hold'),
-(5, 1, '', '', '1', '', '', 'On Hold'),
-(6, 1, '', '', '1', '', '', 'On Hold'),
-(7, 1, '', '', '1', '', '', 'On Hold'),
-(8, 1, '', '', '1', '', '', 'On Hold'),
-(9, 1, '', '', '1', '', '', 'On Hold'),
-(10, 1, '', '', '1', '', '', 'On Hold'),
-(11, 1, '', '', '1', '', '', 'On Hold'),
-(12, 1, '', '', '1', '', '', 'On Hold'),
-(13, 1, 'medo', 'melhachimi514@gmail.com', 'Nursing care', '2PM TO 4PM', 'fuck off dock', 'On Hold'),
-(14, 1, 'medo', 'melhachimi514@gmail.com', 'Nursing care', '6PM TO 8PM', 'fu', 'On Hold');
+INSERT INTO `appointment` (`appointment_id`, `user_id`, `doctor_id`, `user_name`, `user_email`, `service_type`, `time`, `message`, `appointement_status`) VALUES
+(1, 1, 0, 'mohammed', 'melhachimi514@gmail.com', 'Doctor care', '2PM TO 4PM', 'hi doctors i do really need to see you as soon as possible i am so sick', 'Accepted'),
+(2, 1, 0, 'med', 'melhachimi514@gmail.com', 'Medical social services', '2PM TO 4PM', 'knknknddknd', 'On Hold'),
+(3, 1, 0, 'med', 'melhachimi514@gmail.com', 'Medical social services', '2PM TO 4PM', 'knknknddknd', 'On Hold'),
+(4, 1, 0, 'med', 'melhachimi514@gmail.com', 'Medical social services', '10 AM TO 12PM', 'ugugugu', 'On Hold'),
+(5, 1, 0, 'mohammed', 'melhachimi514@gmail.com', 'Doctor care', '2PM TO 4PM', 'jbjhbjhbhjb', 'On Hold'),
+(6, 1, 8, 'mohammed', 'melhachimi514@gmail.com', 'Doctor care', '10 AM TO 12PM', 'hdjdkjdkdj', 'Accepted'),
+(7, 1, 8, 'mohammed', 'melhachimi514@gmail.com', 'Doctor care', '10 AM TO 12PM', 'hdjdkjdkdj', 'On Hold'),
+(8, 1, 8, 'mohammed', 'melhachimi514@gmail.com', 'Doctor care', '10 AM TO 12PM', 'hdjdkjdkdj', 'On Hold'),
+(9, 1, 8, 'mohammed', 'melhachimi514@gmail.com', 'Nursing care', '12PM TO 2PM', 'kjkjk', 'On Hold'),
+(10, 1, 13, 'mohammed', 'melhachimi514@gmail.com', 'Nursing care', '12PM TO 2PM', 'ugudgudgudgdu', 'On Hold'),
+(11, 7, 8, 'ahmed', 'ahmed@gmail.com', 'Medical social services', '2PM TO 4PM', 'dihdihdidhdihdidhidhdihdih', 'On Hold');
 
 -- --------------------------------------------------------
 
@@ -91,21 +89,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`contact_id`, `user_id`, `firstname`, `email`, `comment`) VALUES
-(1, 1, 'mohammed', 'melhachimi514@gmail.com', 'uhudhudhduh'),
-(2, 1, 'fihfihf', 'fihifhiff', 'ucgucguc'),
-(3, 1, 'idhidhid', 'dgugdugd', 'dihihdhdi'),
-(4, 1, '', '', ''),
-(5, 1, '', 'hhh', ''),
-(6, 1, '', '', ''),
-(7, 1, '', '', ''),
-(8, 1, '', '', ''),
-(9, 1, 'jbjbj', 'bjbjb', 'jbjbj'),
-(10, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'hhhhhhhhhh'),
-(11, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'idihdid'),
-(12, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'hi doc'),
-(13, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'hiiiii'),
-(14, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'dgdhgdh'),
-(15, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'uhuhsuhuzs');
+(1, 1, 'mohammed elhachimi', 'melhachimi514@gmail.com', 'i was hoping to see a list of doctors to see when taking an appointement');
 
 -- --------------------------------------------------------
 
@@ -132,7 +116,9 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `use
 (8, 'admin', 'admin@gmail.com', '$2y$10$65osirDR2nNLE.h2xBv5OuTeWvV5SudAt7RuyzGdIaQc4JN14zJMK', 'images.jpg', 'admin'),
 (9, 'ayoub', 'ayoub@gmai.com', '$2y$10$eMtpbv9UCU6ZBVwmIAzfoO5Z.YXVNOCVYiDwCt2FwsBWuurBTxzbq', 'images.jpg', 'user'),
 (11, 'ahmed', 'ahmekd@gmail.com', '$2y$10$dwBKgm1qVJ2Wp76bVqys6uraff/hpEw12fxFIVG4ut/9psPsJexka', 'hh2.jpg', 'user'),
-(12, 'mohammed', 'admin1@gmail.com', '$2y$10$TwJCWJSg63hk7qeu1scn9e4.mDZuq7NXTk9nXCqHlQTsQnOetHmNW', 'hh.jpg', 'user');
+(12, 'mohammed', 'admin1@gmail.com', '$2y$10$TwJCWJSg63hk7qeu1scn9e4.mDZuq7NXTk9nXCqHlQTsQnOetHmNW', 'hh.jpg', 'user'),
+(13, 'salwa', 'salwa@gmail.com', '$2y$10$NvzcxZqMfKK7vv7Gcyq2huOnz0gmGToDOCv8ZKD6xYaQlv61LcF9u', 'kappel-chair.jpg', 'admin'),
+(14, 'laila', 'laila@gmail.com', '$2y$10$TzYz9IAkTY70kd4uDTj8PeF1mmWhlyd6IRsxvuwJXI/A9PGYHV.8C', 'images.jpg', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -173,7 +159,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -185,13 +171,13 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
