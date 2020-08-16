@@ -26,9 +26,7 @@ if(isset($_POST['contact_message'])){
 	   //empty inputs field after submiting the form
 	   $firstname = '';
        $email = '';
-	}
-
-	
+	}	
 }
 
 

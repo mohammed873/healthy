@@ -1,3 +1,7 @@
+<?php
+  include_once ('../controllers/appointement.php');
+  $conn = new Appointement();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -29,7 +33,7 @@
 
 <body>
      <!--::header part start::-->
-     <header class="main_menu home_menu">
+     <header class="main_menu home_menu" style="background-color: #f2f6f8;position: fixed;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -59,9 +63,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">Contact</a>
                                 </li>
-                                <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="index.php">log out</a>
+                                <br>
+                                <li>
+                                    <a class="btn btn-block bg-primary ml-4 text-white" href="index.php">log out</a>
                                 </li>
+                                <br>
                             </ul>
                         </div>
                     </nav>
@@ -158,54 +164,85 @@
         </div>
     </section>
     <!--::review_part end::-->
-
-    <!--::regervation_part start::-->
-    <section class="regervation_part">
+<!--::regervation_part start::-->
+<section class="regervation_part">
         <div class="container">
             <div class="row align-items-center regervation_content">
                 <div class="col-lg-7 col-md-6">
-                    <div class="regervation_part_iner">
-                        <form>
-                            <h2>Make an Appointment</h2>
+                    <div class="regervation_part_iner" style="padding: 6px;">
+
+                    <!-- make an appointment -->
+                    <h2 class="text-center">Make an Appointment</h2>
+                        <?php if(count($error) > 0): ?>
+                            <div class="alert alert-danger text-center">
+                                <?php foreach($error as $error): ?>
+                                <li style="list-style: none;"><?php echo $error; ?></li>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['message'])): ?>
+                            <div class="alert alert-success text-center p-2">
+                                <li style="list-style: none;"> 
+                                <?php 
+                                echo $_SESSION['message'];
+                                unset($_SESSION['message']);
+                                ?> 
+                                </li>
+                            </div>
+                        <?php endif; ?>
+                        <form method="post">
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Name">
+                                    <input type="name" name="user_name" class="form-control" id="inputEmail4" placeholder="Name" value="<?php echo $user_name; ?>">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <input type="password" class="form-control" id="inputPassword4"
-                                        placeholder="Email address">
+                                    <input type="text" name="user_email" class="form-control" id="inputPassword4" placeholder="Email address" value="<?php echo $user_email; ?>">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <select class="form-control" id="Select">
-                                        <option value="1" selected>Select service</option>
-                                        <option value="2">Doctor care</option>
-                                        <option value="3">Nursing care</option>
-                                        <option value="4">Medical social services</option>
-                                        <option value="5">Pharmaceutical services</option>
+                                    <select class="form-control" id="Select" name="service_type">
+                                        <option value="Select service" selected>Select service</option>
+                                        <option value="Doctor care">Doctor care</option>
+                                        <option value="Nursing care">Nursing care</option>
+                                        <option value="Medical social services">Medical social services</option>
+                                        <option value="Pharmaceutical services">Pharmaceutical services</option>
                                     </select>
                                 </div>
                                 <div class="form-group time_icon col-md-6">
-                                    <select class="form-control" id="Select2">
-                                        <option value="" selected>Time</option>
-                                        <option value="1">8 AM TO 10AM</option>
-                                        <option value="1">10 AM TO 12PM</option>
-                                        <option value="1">12PM TO 2PM</option>
-                                        <option value="1">2PM TO 4PM</option>
-                                        <option value="1">4PM TO 6PM</option>
-                                        <option value="1">6PM TO 8PM</option>
-                                        <option value="1">4PM TO 10PM</option>
-                                        <option value="1">10PM TO 12PM</option>
+                                    <select class="form-control" id="Select2" name="time">
+                                        <option value="Time" selected>Time</option>
+                                        <option value="8 AM TO 10AM">8 AM TO 10AM</option>
+                                        <option value="10 AM TO 12PM">10 AM TO 12PM</option>
+                                        <option value="12PM TO 2PM">12PM TO 2PM</option>
+                                        <option value="2PM TO 4PM">2PM TO 4PM</option>
+                                        <option value="4PM TO 6PM">4PM TO 6PM</option>
+                                        <option value="6PM TO 8PM">6PM TO 8PM</option>
+                                        <option value="4PM TO 10PM">4PM TO 10PM</option>
+                                        <option value="4PM TO 10PM">10PM TO 12PM</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <textarea class="form-control" id="Textarea" rows="4"
-                                        placeholder="Your Note "></textarea>
+                                    <textarea class="form-control" id="Textarea"  name="message"placeholder="Your Note "></textarea>
                                 </div>
-                            </div>
-                            <div class="regerv_btn">
-                            <button type="submit" name="make_appointmet" class="btn btn-block  btn-primary p-2"> make appointment</button>
-                            </div>
+                                     <?php  
+                                        $con = $conn->connect();
+                                        $sql="SELECT * FROM users WHERE user_status = 'doctor'";
+                                        $stm=$con->prepare($sql);
+                                        $stm->execute();
+                                        $result=$stm->get_result();
+                                    ?>
+                                <select id="doctor_option" class="bg-warning btn-block p-2 " name="doctor_id">
+                                        <option value="Chose a Doctor">Chose a Doctor</option>
+                                    <?php while($row=$result->fetch_assoc()){ ?>
+                                        <option value="<?=$row['user_id'];?>"><?=$row['user_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                                <input type="hidden" name="appointement_status" value="On Hold">
+                            </div><br>
+                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2" id="make_appointment">make appointmet</button>
                         </form>
+
+                        <!-- end -->
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6">
@@ -215,8 +252,9 @@
                 </div>
             </div>
         </div>
-    </section><br>
+    </section>
     <!--::regervation_part end::-->
+
 
     <!-- footer part start-->
     <footer class="footer-area">
@@ -334,6 +372,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../assests/js/jquery.form.js"></script>
     <script src="../assests/js/jquery.validate.min.js"></script>
     <script src="../assests/js/mail-script.js"></script>
+
+    <script>
+       $('#make_appointment').click(function(){
+            $(window).scrollTop(1120);
+       });
+    </script>
 
 </body>
 

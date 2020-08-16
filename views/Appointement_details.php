@@ -1,6 +1,6 @@
 <?php
-   include '../controllers/conversation.php';
-   $conn = new Appointement();
+include_once('../controllers/appointement.php');
+$conn = new Chat();
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>profile</title>
+    <title>appointement details</title>
     <link rel="icon" href="../assests/img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assests/css/bootstrap.min.css">
@@ -32,8 +32,8 @@
     <link rel="stylesheet" href="../assests/css/profile.css">
 </head>
 <body>
-     <!--::header part start::-->
-     <header class="main_menu home_menu" style="background-color: #f2f6f8;position: fixed;">
+<!--::header part start::-->
+<header class="main_menu home_menu" style="background-color: #f2f6f8;position: fixed;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -104,109 +104,90 @@
     </div><br><br>
 <!-- profile_card part ends-->
 
-<!-- middle extra profile details starts-->
-<div class="col-md-7 chat_container">
-<h2 class="text-center"> consult the doctor</h2>
-            <?php if(count($error) > 0): ?>
-                <div class="alert alert-danger text-center">
-                    <?php foreach($error as $error): ?>
-                    <li style="list-style: none;"><?php echo $error; ?></li>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-            <?php if(isset($_SESSION['message'])): ?>
-                <div class="alert alert-success text-center">
-                    <li style="list-style: none;"><?php 
-                    echo $_SESSION['message'];
-                    unset($_SESSION['message']);
-                    ?></li>
-                </div>
-            <?php endif; ?>
-            <br>
-        <div id="chatbox">
-            <?php  
-                $patient = $_SESSION['user_id'];
-                $con = $conn->connect();
-                // $sql="SELECT chat.patient_id,chat.doctor_id,chat.message,chat.date,users.user_name FROM chat,users WHERE chat.patient_id =users.user_id";
-                $sql="SELECT * from chat WHERE patient_id = '$patient'";
-                $stm=$con->prepare($sql);
-                $stm->execute();
-                $result=$stm->get_result();
-            ?>
-            <?php while($row=$result->fetch_assoc()){ ?>
-                <?php
-                    $doctor_id =$row['doctor_id'];
-                    $patient_id =$row['patient_id'];
-                ?>
-                <ul>
-                    <div id="chatbox_item">
-                        <li class="text-success"><?php echo $patient_id;?></li>
-                        <li class="text-white"><?=$row['message'];?></li>
-                    </div>
-                    <li class="text-warning" ><?=$row['date'];?></li>
-                </ul><br>
-            <?php } ?>
-        </div><br>
-    <form action="profile.php" method="POST">
-        <input type="hidden" name="patient_id" value="<?php echo $_SESSION['user_id'];?>">
-            <?php  
-                $con = $conn->connect();
-                $sql="SELECT * FROM users WHERE user_status = 'doctor'";
-                $stm=$con->prepare($sql);
-                $stm->execute();
-                $result=$stm->get_result();
-            ?>
-        <select id="doctor_option" class="bg-warning btn-block p-2 " name="doctor_id">
-                 <option value="chose your doctor">chose your doctor</option>
-            <?php while($row=$result->fetch_assoc()){ ?>
-                <option value="<?=$row['user_id'];?>"><?=$row['user_name'];?></option>
-            <?php } ?>
-        </select><br><br>
-        <input type="text" placeholder="Enter a message" class="form-control" name="message"><br>
-        <button type="submit" class="btn-success p-2 btn-block form-control" name="consult">consult</button>
-    </form>
-</div>
-<br><br>
+<!--getting the details of each appointment starts-->
+    <div class="col-md-8 text-center p-4" style="margin: auto;background-color:#f2f6f8">
+        <h2 class="text-center text-white bg-dark p-4">
+            The Details of Appointment Number
+            <span class="text-warning">
+                <?php echo $appointment_id;?>
+            </span>
+        </h2>
+        <br>
+        <h3 class="text-dark"> Appointment Number : 
+            <span class="text-primary">
+               <strong>
+                   <?php echo $appointment_id;?>
+               </strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> Doctor Name : 
+            <span class="text-primary">
+                <strong>
+                    <?php
+                        $con = $conn->connect();
+                        $sql="SELECT * FROM `users` WHERE user_id = '$doctor_id'";
+                        $stm=$con->prepare($sql);
+                        $stm->execute();
+                        $result=$stm->get_result();
+                    ?>
+                    <?php while($row=$result->fetch_assoc()){ ?>
+                        <?=$row['user_name'];?>
+                    <?php } ?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> User Name : 
+            <span class="text-primary">
+                <strong>
+                    <?php echo $user_name;?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> User Email : 
+            <span class="text-primary">
+                <strong>
+                    <?php echo $user_email;?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> Service Type : 
+            <span class="text-primary">
+                <strong>
+                    <?php echo $service_type;?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> Appointment Time : 
+            <span class="text-primary">
+                <strong>
+                    <?php echo $time;?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> Appointment Message : 
+            <span class="text-primary">
+                <strong>
+                    <?php echo $message;?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <h3 class="text-dark"> Appointmnet Status : 
+            <span class="text-primary">
+                <strong>
+                    <?php echo $appointement_status;?>
+                <strong>
+            </span> 
+        </h3><hr>
+        <br><br>
+        <h3> 
+            <a href="profile.php" class="text-success">Back To Profile Page</a>
+        </h3>
+    </div>
+    <br><br>
+<!-- getting the details of each appointment ends-->
 
-<!-- showing appointement in a form of a table -->
-<div class="col-md-8 m-auto" style="height: 881px;overflow-y: scroll;">
-        <?php
-            $user_id = $_SESSION['user_id'];
-            $con = $conn->connect();
-            $sql="SELECT * FROM `appointment` WHERE user_id = '$user_id' ";
-            $stm=$con->prepare($sql);
-            $stm->execute();
-            $result=$stm->get_result();
-        ?>
-			<h4 class="text-center bg-primary p-2 text-white">Appointement table</h4>
-			<br>
-		  <table class="table mr-4 table-striped table-light ">
-			<thead class="thead-dark">
-				<tr>
-                    <th>Appointement Number</th>
-					<th>User Name</th>
-                    <th>service Type</th>
-                    <th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php while($row=$result->fetch_assoc()){ ?>
-				<tr>
-                    <td><?=$row['appointment_id'];?></td>
-					<td><?=$row['user_name'];?></td>
-                    <td><?=$row['service_type'];?></td>
-                    <td>
-					 <a href="Appointement_details.php?details=<?=$row['appointment_id']; ?>" class="badge badge-primary p-3">Details</a> 
-                    </td>
-				<?php } ?>
-			</tbody>
-          </table>
-</div>
- <!-- middle extra profile details ends-->   
-
-
-      <!-- footer part start-->
-      <footer class="footer-area">
+<!-- footer part start-->
+<footer class="footer-area">
         <div class="footer section_padding">
             <div class="container">
                 <div class="row">
@@ -323,5 +304,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../assests/js/mail-script.js"></script>
 
 </body> 
+</body>
+</html>
 </body>
 </html>

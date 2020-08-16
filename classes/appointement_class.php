@@ -28,7 +28,6 @@ class Appointement extends DB
         if (empty($message)) {
             $error['message'] = "message required";
         }
-
         return $error;
 
     }
@@ -41,6 +40,30 @@ class Appointement extends DB
         return $result;
     }
 
+}
+
+
+class Chat extends DB
+{
+    public function insert_message($patient_id,$doctor_id,$message)
+    {
+        $sql = "INSERT INTO `chat` ( `patient_id`, `doctor_id`, `message`) VALUES ( '$patient_id', '$doctor_id', '$message')";
+        
+        $result = $this->connect()->query($sql);
+        return $result;
+    }
+
+    public function message_validation($message,$doctor_id,$error)
+    {
+        if (empty($message)) {
+            $error['message'] = "message field must not be empty";
+        }
+        if (($doctor_id ) == 'chose your doctor') {
+            $error['doctor_id'] = " Select a doctor";
+        }
+
+        return $error;
+    }
 }
 
 

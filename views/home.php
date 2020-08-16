@@ -33,7 +33,7 @@
 
 <body>
     <!--::header part start::-->
-    <header class="main_menu home_menu">
+    <header class="main_menu home_menu" style="background-color: #f2f6f8;position: fixed;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -63,18 +63,20 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">Contact</a>
                                 </li>
-                                <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="index.php">log out</a>
+                                <br>
+                                <li>
+                                    <a class="btn btn-block bg-primary ml-4 text-white" href="index.php">log out</a>
                                 </li>
+                                <br>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-    </header>
+    </header><br><br><br><br>
     <!-- Header part end-->
-
+    
     <!-- banner part start-->
     <section class="banner_part">
         <div class="container">
@@ -282,14 +284,16 @@
                             </div>
                         <?php endif; ?>
                         <?php if(isset($_SESSION['message'])): ?>
-                            <div class="alert alert-success text-center">
-                                <li style="list-style: none;"><?php 
+                            <div class="alert alert-success text-center p-2">
+                                <li style="list-style: none;"> 
+                                <?php 
                                 echo $_SESSION['message'];
                                 unset($_SESSION['message']);
-                                ?></li>
+                                ?> 
+                                </li>
                             </div>
                         <?php endif; ?>
-                        <form method="post" action="home.php">
+                        <form method="post">
                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -325,7 +329,7 @@
                                 </div>
                                      <?php  
                                         $con = $conn->connect();
-                                        $sql="SELECT * FROM users WHERE user_status = 'admin'";
+                                        $sql="SELECT * FROM users WHERE user_status = 'doctor'";
                                         $stm=$con->prepare($sql);
                                         $stm->execute();
                                         $result=$stm->get_result();
@@ -338,7 +342,7 @@
                                 </select>
                                 <input type="hidden" name="appointement_status" value="On Hold">
                             </div><br>
-                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2"  id="make-appointement">make appointmet</button>
+                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2" >make appointmet</button>
                         </form>
 
                         <!-- end -->
@@ -563,21 +567,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../assests/js/jquery.form.js"></script>
     <script src="../assests/js/jquery.validate.min.js"></script>
     <script src="../assests/js/mail-script.js"></script>
-
-
 </body>
-
-<script>
-    // $(document).ready(function(){
-    //     $("#make-appointement").load("http://localhost/done/views/home.php#appointment_section",function(){
-    //         window.scrollBy(900, 900);
-    //     });
-    // });
-
-    // function scrollWin() {
-    //      window.scrollBy(900, 900);
-    // }
-</script>
 </html>
 
 

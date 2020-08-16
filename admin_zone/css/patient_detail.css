@@ -1,0 +1,31 @@
+.profiles{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.doctor_profile , .patient_profile{
+    flex-basis: 46%;
+    text-align: center;
+    padding: 1%;
+    background-color: rgb(204, 186, 186);
+}
+.chat_container{
+    margin: auto;
+    padding: 1%;
+    box-shadow: 0px 0px 8px;
+}
+#chatbox{
+    padding: 2%;
+    background-color:#092f7d;
+    height: 450px;
+    overflow-y: scroll;
+}
+#chatbox_item {
+    border-radius: 0px 10px 10px 25px;
+    width: fit-content;
+    padding: 1.5%;
+    background-color: black;
+}
+#chatbox_item li , #chatbox li{
+    list-style: none;
+}

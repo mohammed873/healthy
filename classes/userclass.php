@@ -12,7 +12,7 @@ class Users extends DB
         return $result;
     }
 
-    public function signupvalidation($user_name,$user_email,$user_password,$user_confpassword,$user_picture,$error)
+    public function signupvalidation($user_name,$user_email,$user_password,$user_confpassword,$user_picture,$user_status,$error)
     {
         if (empty($user_name)) {
             $error['user_name'] = "User name required";
@@ -46,6 +46,10 @@ class Users extends DB
         if (! file_exists($_FILES["user_picture"]["tmp_name"])) {
             $error['user_picture'] = "Picture required";
         }
+        if (($user_status ) == 'choose the status of the admin') {
+            $error['user_status'] = " Select a user status";
+        }
+        
         
         return $error;
     }

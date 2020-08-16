@@ -18,7 +18,7 @@ if (isset($_POST['signup'])) {
     $user_picture = $_FILES['user_picture'];
     $user_status = $_POST['user_status'];
 
-    $error = $user->signupvalidation($user_name,$user_email, $user_password,$user_confpassword,$user_picture,$error);
+    $error = $user->signupvalidation($user_name,$user_email, $user_password,$user_confpassword,$user_picture,$user_status,$error);
 
     $con = $user->connect();
     $emailQuery = "SELECT * FROM users WHERE user_email = ? LIMIT 1";
@@ -66,7 +66,7 @@ if (isset($_POST['login'])) {
              header('location:home.php');
              exit();
         }
-        else if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'admin'){
+        if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'doctor'){
             //login success
             $_SESSION['user_id'] = $user_data['user_id'];
             $_SESSION['user_name'] = $user_data['user_name'];
@@ -79,9 +79,20 @@ if (isset($_POST['login'])) {
         else{
         $error['login_fail'] = "wrong credition";
         }
+        if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'Secertaire'){
+            //login success
+            $_SESSION['user_id'] = $user_data['user_id'];
+            $_SESSION['user_name'] = $user_data['user_name'];
+            $_SESSION['user_email'] = $user_data['user_email'];
+            $_SESSION['user_picture'] = $user_data['user_picture'];
+            $_SESSION['user_status'] = $user_data['user_status'];
+            header('location:../admin_zone/secertaire_panel.php');
+            exit();
+       }
+        else{
+        $error['login_fail'] = "wrong credition";
+        }
      }
 } 
-
-
 
 ?>

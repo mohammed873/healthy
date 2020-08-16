@@ -513,6 +513,13 @@ ul {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .btn_res {
+    margin-left: 0px !important;
+    margin-top: 1px !important;
+  }
+}
+
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   /* line 26, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_button.scss */
   .btn_1 {
@@ -2370,7 +2377,7 @@ ul {
   .banner_part .banner_text {
     text-align: center;
     padding-top: 0px;
-    height: 700px;
+    height: 909px;
   }
 }
 
@@ -2379,7 +2386,7 @@ ul {
   .banner_part .banner_text {
     text-align: center;
     padding-top: 0px;
-    height: 750px;
+    height: 909px;
   }
 }
 
@@ -2388,14 +2395,14 @@ ul {
   .banner_part .banner_text {
     text-align: center;
     padding-top: 0px;
-    height: 750px;
+    height: 909px;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 21, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_banner.scss */
   .banner_part .banner_text {
-    height: 650px;
+    height: 909px;
   }
 }
 

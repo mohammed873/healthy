@@ -17,7 +17,7 @@ if (isset($_POST['add_admin'])) {
     $user_picture = $_FILES['user_picture'];
     $user_status = $_POST['user_status'];
 
-    $error = $user->signupvalidation($user_name,$user_email, $user_password,$user_confpassword,$user_picture,$error);
+    $error = $user->signupvalidation($user_name,$user_email, $user_password,$user_confpassword,$user_picture,$user_status,$error);
 
     $con = $user->connect();
     $emailQuery = "SELECT * FROM users WHERE user_email = ? LIMIT 1";
@@ -38,7 +38,7 @@ if (isset($_POST['add_admin'])) {
         // registering a new user and sending the data to the database
         $user->sign_up($user_name, $user_email, $user_password, $user_picture, $user_status);
         //sending a register confirmation message to the user
-        $_SESSION['message'] = "admin has been added successfuly";
+        $_SESSION['message'] = "user has been added successfuly check the admins table";
         //empty inputs field after submiting the form
         $user_name = '';
         $user_email = '';
@@ -55,8 +55,8 @@ if(isset($_GET['delete'])){
       $stmt->bind_param("i",$id);
       $stmt->execute();
       header('location:admin_panel.php');
-
 }
+
 
 /*update the appointement status*/
 if(isset($_POST['manage'])){
@@ -67,6 +67,31 @@ if(isset($_POST['manage'])){
     $query = "UPDATE appointment SET appointement_status = '$appointement_status' WHERE appointment_id = '$appointment_id'";
     $stmt=$con->prepare($query);
     $stmt->execute();
-
-
+    header('location:secertaire_panel.php');
 }
+
+/* getting the details of each appointment */
+if(isset($_GET['details'])){
+    $id=$_GET['details'];
+
+    $query="SELECT * FROM appointment WHERE appointment_id = ?";
+    $con = $user->connect();
+    $stmt=$con->prepare($query);
+    $stmt->bind_param("i",$id);
+    $stmt->execute();
+    $result=$stmt->get_result();
+    $row=$result->fetch_assoc();
+
+    $appointment_id=$row['appointment_id'];
+    $user_id=$row['user_id'];
+    $doctor_id=$row['doctor_id'];
+    $user_name=$row['user_name'];
+    $user_email=$row['user_email'];
+    $service_type=$row['service_type'];
+    $time=$row['time'];
+    $message=$row['message'];
+    $appointement_status=$row['appointement_status'];
+}
+
+
+

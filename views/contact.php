@@ -34,7 +34,7 @@
 
 <body>
    <!--::header part start::-->
-   <header class="main_menu home_menu">
+   <header class="main_menu home_menu" style="background-color: #f2f6f8;position: fixed;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -64,9 +64,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">Contact</a>
                                 </li>
-                                <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="index.php">log out</a>
+                                <br>
+                                <li>
+                                    <a class="btn btn-block bg-primary ml-4 text-white" href="index.php">log out</a>
                                 </li>
+                                <br>
                             </ul>
                         </div>
                     </nav>
@@ -94,119 +96,72 @@
   <!-- breadcrumb start-->
 
   <!-- ================ contact section start ================= -->
-  <section class="contact-section section_padding">
-    <div class="container">
-      <div class="d-none d-sm-block mb-5 pb-4">
-        <div id="map" style="height: 480px;"></div>
-        <script>
-          function initMap() {
-            var uluru = {
-              lat: -25.363,
-              lng: 131.044
-            };
-            var grayStyles = [{
-                featureType: "all",
-                stylers: [{
-                    saturation: -90
-                  },
-                  {
-                    lightness: 50
-                  }
-                ]
-              },
-              {
-                elementType: 'labels.text.fill',
-                stylers: [{
-                  color: '#ccdee9'
-                }]
-              }
-            ];
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: {
-                lat: -31.197,
-                lng: 150.744
-              },
-              zoom: 9,
-              styles: grayStyles,
-              scrollwheel: false
-            });
-          }
-        </script>
-        <script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
-        </script>
+  <section class="contact-section p-2">
+      <h2 class="text-center text-white bg-dark  p-2">Get in Touch</h2>
+      <br><br><br>
 
-      </div>
-
-
-      <div class="row">
-        <div class="col-12">
-          <h2 class="contact-title">Get in Touch</h2>
-        </div>
-        <div class="col-lg-8">
-        <?php if(count($error) > 0): ?>
-                <div class="alert alert-danger text-center">
-                    <?php foreach($error as $error): ?>
-                    <li style="list-style: none;"><?php echo $error; ?></li>
-                    <?php endforeach; ?>
+      <div class="row col-md-8" style="margin: auto;">
+        <div class="col-md-6">
+              <?php if(count($error) > 0): ?>
+                  <div class="alert alert-danger text-center">
+                      <?php foreach($error as $error): ?>
+                      <li style="list-style: none;"><?php echo $error; ?></li>
+                      <?php endforeach; ?>
+                  </div>
+              <?php endif; ?>
+              <?php if(isset($_SESSION['message'])): ?>
+                  <div class="alert alert-success text-center">
+                      <li style="list-style: none;"><?php 
+                      echo $_SESSION['message'];
+                      unset($_SESSION['message']);
+                      ?></li>
+                  </div>
+              <?php endif; ?>
+              <br>
+            <form class="form-contact contact_form"  method="post" id="contactForm"
+              novalidate="novalidate">
+              <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <textarea class="form-control w-100" name="comment" id="message" placeholder = 'Enter Message' ></textarea >
+                  </div>
                 </div>
-            <?php endif; ?>
-            <?php if(isset($_SESSION['message'])): ?>
-                <div class="alert alert-success text-center">
-                    <li style="list-style: none;"><?php 
-                    echo $_SESSION['message'];
-                    unset($_SESSION['message']);
-                    ?></li>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="firstname" id="name" type="text" 
+                    placeholder='Enter your name' value="<?php echo $firstname; ?>">
+                  </div>
                 </div>
-            <?php endif; ?>
-            <br>
-          <form class="form-contact contact_form" action="contact.php" method="post" id="contactForm"
-            novalidate="novalidate">
-            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <textarea class="form-control w-100" name="comment" id="message" placeholder = 'Enter Message' ></textarea >
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="firstname" id="name" type="text" 
-                   placeholder='Enter your name' value="<?php echo $firstname; ?>">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email"  placeholder='Enter email address' value="<?php echo $email; ?>">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="email" id="email" type="email"  placeholder='Enter email address' value="<?php echo $email; ?>">
+                  </div>
                 </div>
               </div>
-              <div class="col-12">
-            
+              <div class="form-group mt-3">
+                <button type="submit" name="contact_message" class="btn btn-block btn-primary">send message</button>
               </div>
-            </div>
-            <div class="form-group mt-3">
-              <button type="submit" name="contact_message" class="btn btn-block btn-primary">send message</button>
-            </div>
-          </form>
+            </form>
 
         </div>
 
-        <div class="col-lg-4">
-          <div class="media contact-info">
+        <div class="col-md-5  ml-5">
+          <div class="media contact-info" style="position: relative;left: 26%;top: 19%;">
             <span class="contact-info__icon"><i class="ti-home"></i></span>
             <div class="media-body">
               <h3>Buttonwood, California.</h3>
               <p>Rosemead, CA 91770</p>
             </div>
           </div>
-          <div class="media contact-info">
+          <div class="media contact-info" style="position: relative;left: 26%;top: 19%;">
             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
             <div class="media-body">
               <h3>00 (440) 9865 562</h3>
               <p>Mon to Fri 9am to 6pm</p>
             </div>
           </div>
-          <div class="media contact-info">
+          <div class="media contact-info" style="position: relative;left: 26%;top: 19%;">
             <span class="contact-info__icon"><i class="ti-email"></i></span>
             <div class="media-body">
               <h3>support@colorlib.com</h3>
@@ -216,6 +171,11 @@
         </div>
       </div>
     </div>
+
+
+
+
+    
   </section>
   <!-- ================ contact section end ================= -->
 

@@ -46,19 +46,20 @@ body{
     }
 }
 .chat_container{
-    margin: auto;padding: 1%;box-shadow: 0px 0px 8px;
+    margin: auto;
+    padding: 1%;
+    box-shadow: 0px 0px 8px;
 }
 #chatbox{
     padding: 2%;
-    height:40vh;
     background-color:#092f7d;
+    height: 450px;
+    overflow-y: scroll;
 }
-#chatbox p{
-    font-size: 20px;
-    background-color: white;
-    padding: 1%;
+#chatbox_item {
     border-radius: 0px 10px 10px 25px;
-    text-align: center;
     width: fit-content;
-    color: black;
+    padding: 1.5%;
+    background-color: black;
+    
 }

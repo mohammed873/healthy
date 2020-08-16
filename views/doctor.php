@@ -29,7 +29,7 @@
 
 <body>
      <!--::header part start::-->
-     <header class="main_menu home_menu">
+     <header class="main_menu home_menu" style="background-color: #f2f6f8;position: fixed;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -59,9 +59,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.php">Contact</a>
                                 </li>
-                                <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="index.php">log out</a>
+                                <br>
+                                <li>
+                                    <a class="btn btn-block bg-primary ml-4 text-white" href="index.php">log out</a>
                                 </li>
+                                <br>
                             </ul>
                         </div>
                     </nav>

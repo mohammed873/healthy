@@ -163,7 +163,7 @@ section p {
     background-color: blue;
     padding: 3%;
     text-align: center;
-    margin-top: 8%;
+    margin-top: 20%;
     font-size: 22px;
     font-family: auto;
 }
@@ -176,10 +176,17 @@ section p {
 .responsive_panel{
     display: none;
 }
+.blank-div{
+    display: none;
+}
 
 @media screen and (max-width: 1388px) { 
    .left-sidebar{
         display: none;
+    }
+    .blank-div{
+        display: block !important;
+        height: 406px !important;
     }
     .responsive_logo{
         display: block;
