@@ -1,3 +1,7 @@
+<?php
+   include_once ('../controllers/admin.php');
+   $conn = new Admins();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -96,164 +100,72 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8">
                     <div class="section_tittle text-center">
-                        <h2> Experienced Doctors</h2>
-                        <p>we only hire the best doctors for your health and for a secure recovery</>
+                        <h2> Experienced Doctor</h2>
+                        <p>The Best Doctor For Your Health And For A Fast & Secure Secovery</>
+                        <br>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_1.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Adam Billiard</h3>
-                                <p>Heart specialist</p>
-                            </div>
-                        </div>
+            <div class="p-2">
+                   <div class="text-center">
+                       <?php
+                            $con = $conn->connect();
+                            $sql="SELECT * from admins WHERE admin_status = 'doctor'";
+                            $stm=$con->prepare($sql);
+                            $stm->execute();
+                            $result=$stm->get_result();
+                       ?>
+                       <?php while($row=$result->fetch_assoc()){ ?>
+                          <img src="<?php echo 'uploads/' . $row['admin_picture']; ?>" alt="profile_pic" style="width: 210px;">
+                          <hr class="bg-primary">
+                          <hr class="bg-primary">
+                          <br>
+                          <div class="doctor_info d-flex justify-content-spacearound">
+
                     </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_4.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
+                        <div style="text-align: initial;">
+                            <h5 class="text-primary">Doctor Name: 
+                                <span style="font-weight: bold; color:black">
+                                   <?=$row['admin_name'];?>
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">Doctor Email: 
+                                <span style="font-weight: bold; color:black">
+                                   <?=$row['admin_email'];?>
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">Doctor Specialization: 
+                                <span style="font-weight: bold; color:black">
+                                   heart problems
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">phone number: 
+                                <span style="font-weight: bold; color:black">
+                                   857878598948
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">linkdin Profile: 
+                                <span style="font-weight: bold; color:black">
+                                   www.duhduhdudh.com
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">Years of Experience: 
+                                <span style="font-weight: bold; color:black">
+                                   12
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">Sergeries Number: 
+                                <span style="font-weight: bold; color:black">
+                                   12
+                                </span>
+                            </h5>
+                            <h5 class="text-primary">More About Doctor: 
+                                <span style="font-weight: bold; color:black">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                                </span>
+                            </h5>
                         </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Adam Billiard</h3>
-                                <p>Medicine specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_2.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Fred Macyard</h3>
-                                <p>CHeart specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_3.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Justin Stuard</h3>
-                                <p>Heart specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_1.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Adam Billiard</h3>
-                                <p>Heart specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_4.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Adam Billiard</h3>
-                                <p>Medicine specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_2.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Fred Macyard</h3>
-                                <p>CHeart specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                            <img src="../assests/img/doctor/doctor_3.png" alt="doctor">
-                            <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
-                            </div>
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>DR Justin Stuard</h3>
-                                <p>Heart specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php } ?>    
             </div>
         </div>
     </section>

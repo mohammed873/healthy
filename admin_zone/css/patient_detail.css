@@ -20,6 +20,10 @@
     height: 450px;
     overflow-y: scroll;
 }
+#chatbox ul{
+    position: relative;
+    left: -5%;
+}
 #chatbox_item {
     border-radius: 0px 10px 10px 25px;
     width: fit-content;
@@ -28,4 +32,6 @@
 }
 #chatbox_item li , #chatbox li{
     list-style: none;
+    font-size: 15px;
+    font-family: auto;
 }

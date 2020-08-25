@@ -22,9 +22,6 @@ class Appointement extends DB
         if (($time ) == 'Time') {
             $error['time'] = " Select Time";
         }
-        if (($doctor_id ) == 'Chose a Doctor') {
-            $error['doctor_id'] = " Select a doctor";
-        }
         if (empty($message)) {
             $error['message'] = "message required";
         }
@@ -41,36 +38,5 @@ class Appointement extends DB
     }
 
 }
-
-
-class Chat extends DB
-{
-    public function insert_message($patient_id,$doctor_id,$message)
-    {
-        $sql = "INSERT INTO `chat` ( `patient_id`, `doctor_id`, `message`) VALUES ( '$patient_id', '$doctor_id', '$message')";
-        
-        $result = $this->connect()->query($sql);
-        return $result;
-    }
-
-    public function message_validation($message,$doctor_id,$error)
-    {
-        if (empty($message)) {
-            $error['message'] = "message field must not be empty";
-        }
-        if (($doctor_id ) == 'chose your doctor') {
-            $error['doctor_id'] = " Select a doctor";
-        }
-
-        return $error;
-    }
-}
-
-
-
-
-
-
-
 
 ?>

@@ -77,10 +77,10 @@ class Users extends DB
         return $error;
     }
 
-    public function login($table, $condition)
+    public function login($table1, $condition)
     {
         $conn = $this->connect();
-        $sql = "SELECT * FROM $table";
+        $sql = "SELECT * FROM $table1";
         $i = 0;
         foreach ($condition as $key => $value) {
             if ($i === 0) {
@@ -100,5 +100,22 @@ class Users extends DB
         $records = $stmt->get_result()->fetch_assoc();
         return $records;
     }
+
+    function admin_login()
+    {
+        
+    }
+
+}
+
+class edit_profile extends DB{
+    public function update_profile_pic ($user_picture)
+    {
+        $sql = "UPDATE users SET user_picture ='$user_picture' WHERE user_status = 'doctor'";
+
+        $result = $this->connect()->query($sql);
+        return $result;
+    }
+    
 
 }

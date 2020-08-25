@@ -1,7 +1,6 @@
 <?php
  include_once ('../controllers/admin.php');
- include_once ('../classes/userclass.php');
- $data = new Users();
+ $data = new Admins();
 ?>
 <!DOCTYPE html>
 <head>
@@ -17,8 +16,6 @@
 
 	<!-- Syntax Highlighter -->
 	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
-	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
-
 	<!-- Font Awesome CSS-->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	 <!-- Bootstrap CSS -->
@@ -33,34 +30,52 @@
 
 <body>
 
+    <?php
+        $con = $data->connect();
+		$sql="SELECT * FROM admins WHERE admin_status = 'Secertaire'";
+		$stm=$con->prepare($sql);
+		$stm->execute();
+		$result=$stm->get_result();
+	?>
+	<?php while($row=$result->fetch_assoc()){ ?>
 	<aside class="left-sidebar">
 		<div class="logo" style="text-align: center; padding-left: 0 !important;">
 			<h3 class="text-white">Welcome Secertaire 
 				<span class="text-warning">
-				    <?php echo $_SESSION['user_name'];?>
+				   <?= $row['admin_name'];?>
 			    </span>
 			</h3>
 			<hr class="bg-white text-white"><br>
 		</div>
 		
 		<div style="text-align: center;">
-			<h2  style="color: wheat;">profile</h2><br>
-			<img src="<?php echo '../views/uploads/' . $_SESSION['user_picture']; ?>" alt="profile_picture" style="width: 195px;height: 227px;border-radius: 5%;">
+		   <img src="<?php echo '../views/uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
 			<br><br>
-			<h6 style="color: white;">name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?> </h4>
-			<br>
-			<h6 style="color: white;">email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h6>
-			<br>
-			<h6 style="color: white;">Status : <span style="color: blue;"><?php echo $_SESSION['user_status'];?></span></h6>
+			<h6 style="color: white;">name : 
+			   <span style="color: #f1b608;line-height: 30px;">
+			       <?= $row['admin_name'];?> 
+			   </span> 
+		    </h6>
+			<h6 style="color: white;line-height: 30px;">email : 
+			   <span style="color: #f1b608;">
+			        <?= $row['admin_email'];?> 
+		        </span>
+	        </h6>
+			<h6 style="color: white;line-height: 30px;">Status : 
+			    <span style="color: #f1b608;">
+				    <?= $row['admin_status'];?> 
+		        </span>
+	        </h6>
 		</div>
 		<br><br><br>
-		<div class="doctor_procceses p-2">
+		<div class="doctor_procceses2 p-2">
 		    <p><a href="#appointments">appointments</a></p>
 	        <p><a href="#contact_messages">contact messages</a></p>
 		</div><br><br>
-		<div id="admin_logout_btn">
+		<div id="admin_logout_btn2">
 			<a href="../views/index.php">log out</a>
 		</div>
+		
 	</aside>
 
 <!-- ressponsive panel section -->
@@ -68,7 +83,7 @@
 		<div class="responsive_logo">
 				<h3 class="text-white">Welcome Secertaire 
 					<span class="text-warning">
-						<?php echo $_SESSION['user_name'];?>
+					   <?= $row['admin_name'];?>
 					</span>
 				</h3>
 				<hr class="bg-white text-white"><br>
@@ -76,12 +91,23 @@
 		<div class="responsive_panel">
 			<br><br><br>
 			<div class="responsive_doctor_profile">
-				<h2  style="color: wheat;">profile</h2><br>
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTreksTEerNOVl1wm7JRykQifXUI_RKimR8jjtzG-e1AcyrTajW&usqp=CAU" alt="profile_picture" style="width: 100px; height: 100px;">
+			    <img src="<?php echo '../views/uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
 				<br><br>
-				<h5 style="color: white;">name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?> </h5>
-				<h5 style="color: white;">email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h5>
-				<h5 style="color: white;">Status : <span style="color: blue;"><?php echo $_SESSION['user_status'];?></span></h5>
+				<h6 style="color: white;">name : 
+					<span style="color:#f1b608;">
+					    <?= $row['admin_name'];?>
+					</span> 
+			    </h6>
+				<h6 style="color: white;">email : 
+					<span style="color:#f1b608;">
+						<?= $row['admin_email'];?>
+					</span>
+				</h6>
+				<h6 style="color: white;">Status : 
+					<span style="color:#f1b608;">
+						<?= $row['admin_status'];?>
+					</span>
+				</h6>
 			</div>
 			<br><br>
 			<div class="responsive_doctor_procceses">
@@ -94,17 +120,18 @@
 			<div id="responsive_admin_logout_btn">
 				<a href="../views/index.php">log out</a>
 			</div>
-	    </div>
+		</div>
+	<?php } ?>
 	</div>
 
 	<div class="blank-div"></div>
 
 	<!-- the body section -->
-	<div class="right_body" style="width: 82%;margin-left: 18%;">
+	<div class="right_body" >
 	 <br><br>
 	
         <!-- showing all appointement -->
-        <div class="col-md-10" style="margin:auto;height:927px;overflow-y:scroll;" id="appointments">
+        <div class="col-md-8" style="margin:auto;height:927px;overflow-y:scroll;" id="appointments">
             <?php
                 $con = $data->connect();
                 $sql="SELECT * FROM `appointment`";
@@ -139,7 +166,7 @@
         </div><br><br><br>
 
         <!-- showing all Contact messages -->
-        <div class="col-md-10" style="margin: auto;height:927px;overflow-y:scroll;" id="contact_messages">
+        <div class="col-md-8" style="margin: auto;height:927px;overflow-y:scroll;" id="contact_messages">
             <?php
                 
                 $user_id = $_SESSION['user_id'];

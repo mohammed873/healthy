@@ -1,5 +1,5 @@
 <?php
-include_once('../controllers/conversation.php');
+include_once('../controllers/patient_details_controler.php');
 $conn = new Chat();
 ?>
 <!DOCTYPE html>
@@ -18,35 +18,72 @@ $conn = new Chat();
     <link rel="stylesheet" href="css/patient_detail.css">
 </head>
 <body>
-    <div class="text-center p-2 bg-primary">
+    <div class="text-center p-2 bg-dark" style="position: fixed;width: 100%; z-index:99">
         <h3 >
-           <a href="admin_panel.php" class="text-white">Back To Doctor Panel</a>
+           <a href="admin_panel.php" class="text-white">Back To Doctor Page</a>
         </h3>
     </div>
+    <br><br><br>
+    <?php if(isset($_SESSION['message'])): ?>
+                <div class="alert alert-success">
+                    <h5 class="text-center"><?php 
+                    echo $_SESSION['message'];
+                    unset($_SESSION['message']);
+                    ?></h5>
+                </div>
+    <?php endif; ?>
     <br>
-    <div class="profiles">
-        <div class="doctor_profile">
-            <h2 class="text-danger">Doctor Profile</h2>
-            <hr>
-          <img src="<?php echo '../views/uploads/' . $_SESSION['user_picture']; ?>" alt="profile_picture" style="width: 195px;height: 227px;border-radius: 5%;"><br><br>
-          <p> user_id : <strong><?php echo $_SESSION['user_id'];?></strong></p>
-          <p> user_name : <strong><?php echo $_SESSION['user_name'];?></strong></p>
-          <p> user_name : <strong><?php echo $_SESSION['user_email'];?></strong></p>
-          <p> user_status  : <strong><?php echo $_SESSION['user_status'];?></strong></p>
-        </div>
-
-        <div class="patient_profile">
-            <h2 class="text-danger">Patient Profile</h2>
-                <hr>
-            <img src="<?php echo '../views/uploads//' . $patient_picture ?>" alt="profile_pic" style="width: 195px;height: 227px;border-radius: 5%;"><br><br>
-            <p> user_id : <strong><?php echo $user_id;?></strong></p>
-            <p> user_name : <strong><?php echo $user_name;?></strong></p>
-            <p> user_name : <strong><?php echo $user_email;?></strong></p>
-            <p> user_status  : <strong><?php  echo $user_status;?></strong></p>
+    <div class="col-md-4 m-auto">
+       <button type="submit" class="btn btn-block btn-success" id="add_note">
+           medical notes
+        </button>
+        <br>
+        <div class="bg-warning p-2 patient_notes" style="display:none">
+            <div class="text-center">
+                <img src="<?php echo '../views/uploads/' . $patient_picture; ?>" alt="user picture" style="width:45%;">
+                <br><br>
+                <p>User Name : 
+                    <span  class="text-primary">
+                        <?= $user_name; ?>
+                    </span> 
+                </p>
+                <p>User Email : 
+                    <span class="text-primary">
+                        <?= $user_email; ?>
+                    </span> 
+                </p>
+            </div>
+            <div>
+                <form action="" method="POST">
+                    <div class="bg-white p-2" style="height:170px;overflow-y:scroll;">
+                    <?php  
+                        $con = $conn->connect();
+                        $sql="SELECT * from medical_notes WHERE patient_id = '$user_id'";
+                        $stm=$con->prepare($sql);
+                        $stm->execute();
+                        $result=$stm->get_result();
+                    ?>
+                    <?php while($row=$result->fetch_assoc()){ ?>
+                        <p class="bg-dark text-white p-2 text-center">
+                            <?=$row['note'];?>
+                        </p>
+                    <?php } ?>   
+                    </div>
+                    <br>
+                    <input type="text" name="note" id="note" class="form-control" placeholder="Enter Note">
+                    <div class="text-center text-danger">
+                        <p id="error"></p>
+                    </div>
+                    <input type="hidden" name="patient_id" value="<?= $user_id; ?>">
+                    <input type="hidden" name="patient_name" value="<?= $user_name; ?>">
+                    <button type="submit" class="btn btn-block btn-success" name="add_note" id="send_note">Add Medical Note</button>
+                </form>
+            </div> 
         </div>
     </div>
 
     <br><br>
+
     <div class="col-md-7 chat_container">
       <h2 class="text-center">Patient Chat</h2>
             <?php if(count($error) > 0): ?>
@@ -66,10 +103,8 @@ $conn = new Chat();
             <?php endif; ?><br>
         <div id="chatbox">
             <?php  
-                $patient = $_SESSION['user_id'];
                 $con = $conn->connect();
-                // $sql="SELECT chat.patient_id,chat.doctor_id,chat.message,chat.date,users.user_name FROM chat,users WHERE chat.patient_id =users.user_id";
-                $sql="SELECT * from chat WHERE doctor_id = '$patient'";
+                $sql="SELECT * from chat WHERE sender_id = '$user_id' OR recevier_id = '$user_id'";
                 $stm=$con->prepare($sql);
                 $stm->execute();
                 $result=$stm->get_result();
@@ -77,21 +112,51 @@ $conn = new Chat();
             <?php while($row=$result->fetch_assoc()){ ?>
                 <ul>
                     <div id="chatbox_item">
-                        <li class="text-success">medo</li>
-                        <li class="text-white"><?=$row['message'];?></li>
+                        <li class="text-success">
+                            <?=$row['sender_name'];?>
+                        </li>
+                        <li class="text-white" id="last_message">
+                            <?=$row['message'];?>
+                        </li>
                     </div>
-                    <li class="text-warning" ><?=$row['date'];?></li>
-                </ul><br>
+                    <li class="text-warning" >
+                        <?=$row['date'];?>
+                    </li>
+                </ul>
             <?php } ?>
         </div><br>
-        <form action="patient_details.php" method="POST">
-            <input type="hidden" name="patient_id" value="<?php echo $user_id;?>">
-            <input type="hidden" name="doctor_id" value="<?php echo $_SESSION['user_id'];?>">
+        <form action="" method="POST">
+            <input type="hidden" name="recevier_id" value="<?php echo $user_id;?>">
+            <input type="hidden" name="recevier_name" value="<?php echo $user_name;?>">
+            <input type="hidden" name="sender_id" value="<?php echo $_SESSION['user_id'];?>">
+            <input type="hidden" name="sender_name" value="salwa">
             <input type="text" placeholder="Enter a message" class="form-control" name="message"><br>
-            <button type="submit" class="btn-success p-2 btn-block form-control" name="consult">consult</button>
+            <input type="hidden" name="message_status" value="unread">
+            <button type="submit" class="btn-success p-2 btn-block form-control" id="consult" name="consult">consult</button>
         </form>
     </div>
-        
-          
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
+<script>
+    // $(document).ready(function(){
+    //     $('body').load(function(){
+    //        $('#chatbox').scrollTop(40000);
+    //     });
+    // });
+    $('#add_note').click(function(){
+            $('.patient_notes').slideToggle(1500);
+	});
+
+    $('#send_note').click(function(e){
+        if ($("#note").val() === '') {
+            e.preventDefault();
+            $('#error').html('Note fiels must not be empty');
+        }
+        else{
+            //send data
+        }
+	});
+</script>          
 </body>
 </html>

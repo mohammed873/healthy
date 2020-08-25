@@ -6,155 +6,45 @@ body{
 	line-height:18px;
 	color:#777;
 }
-
-p{
-	margin:0;
+.right_body{
+    width: 90% !important;
+    margin: auto;
 }
-
-a {
-    color: #aa0a5f;
-}
-
-a, a:hover, a:focus{
-	text-decoration: none;
-	outline: 0;
-}
-h1, h2, h3,
-h4, h5, h6 {
-    color: #333;
-	margin:0;
-    font-weight: normal;
-}
-
-h1 { font-size: 28px;}
-h2 { font-size: 24px;}
-h3 { font-size: 18px;}
-h5 { font-size: 16px;}
-h6 { font-size: 14px;}
-
-strong {
-  letter-spacing: 1px;
-}
-
-code {
-  background-color: #ddd;
-  border-radius: 3px;
-  color: #000;
-  font-size: 85%;
-  margin: 0;
-  padding: 5px 10px;
-}
-
-code a {
-    color: #333;
-}
-
-code a:hover {
-    text-decoration: underline;
-}
-
-section p {
-  line-height: 28px;
-}
-
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-.clearfix:after {
-    clear: both;
-}
-.clearfix {
-    *zoom: 1;
-}
-
-.tan {
-  margin-bottom: 10px;
-}
-
-.fifteen{
-    margin-bottom: 15px;
-}
-
-.twenty{
-    margin-bottom: 20px;
-}
-
-.center {
-    text-align: center;
-}
-
-.title {
-    margin: 50px 0 30px;
-}
-
-.syntaxhighlighter {
-    border: 1px solid #efefef;
-    max-height: 100% !important;
-    padding: 20px 0;
-}
-
-
-.main-content section {
-  margin: 0 5%;
-}
-
-
 .left-sidebar {
     background-color: #0a0612;
-    float: left;
     min-height: 100%;
     width: 18%;
     position: fixed;
+    left: -17%;
+    z-index: 99 !important;
 }
-
-.logo {
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-top: 70px;
+.left-sidebar:hover{
+    left: 0%;
 }
-.logo h1{
-    color: #fff;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-.left-nav ul {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-}
-
-.left-nav ul li a {
-    color: #fff;
-    display: block;
-    padding: 10px 35px;
-    -webkit-transition: all 0.3s ease-in 0s;
-       -moz-transition: all 0.3s ease-in 0s;
-        -ms-transition: all 0.3s ease-in 0s;
-         -o-transition: all 0.3s ease-in 0s;
-            transition: all 0.3s ease-in 0s;
-}
-
-.left-nav ul li a:hover, .left-nav ul li .current {
-    background-color: #f84b67;
-    color: #fff;
-}
-
 .doctor_procceses{
+    width: 100%;
     text-align: center;
     box-shadow: 0px 0px 10px;
     background-color: white;
     padding: 1px !important;
+    margin: auto;
 }
-.doctor_procceses p{
+.doctor_procceses2{
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 0px 10px;
+    background-color: white;
+    padding: 1px !important;
+   
+}
+.doctor_procceses p, .doctor_procceses2 p{
     font-size: 21px;
     font-family: auto;
 }
-.doctor_procceses p a{
+.doctor_procceses p a ,.doctor_procceses2 p a{
     color: #000;
 }
-.doctor_procceses p a:hover{
+.doctor_procceses p a:hover, .doctor_procceses2 p a:hover{
     color:blue;
     text-decoration: underline;
 }
@@ -163,11 +53,20 @@ section p {
     background-color: blue;
     padding: 3%;
     text-align: center;
-    margin-top: 20%;
+    margin-top: 10%;
     font-size: 22px;
     font-family: auto;
 }
-#admin_logout_btn a{
+#admin_logout_btn2{
+    width: 100%;
+    background-color: blue;
+    padding: 3%;
+    text-align: center;
+    margin-top: 11%;
+    font-size: 22px;
+    font-family: auto;
+}
+#admin_logout_btn a , #admin_logout_btn2 a{
    color: white;
 }
 .responsive_logo{
@@ -180,13 +79,13 @@ section p {
     display: none;
 }
 
-@media screen and (max-width: 1388px) { 
+@media screen and (max-width: 1220px) { 
    .left-sidebar{
         display: none;
     }
     .blank-div{
         display: block !important;
-        height: 406px !important;
+        height: 425px !important;
     }
     .responsive_logo{
         display: block;
@@ -217,9 +116,15 @@ section p {
         font-family: auto;
         font-size: 21px;
     }
+    table thead{
+        font-size: 12px;
+    }
     .responsive_doctor_procceses #inner{ 
         padding: 2%;
-        margin-top: 37px;
+        font-size: 19px;
+    }
+    .responsive_doctor_procceses p{
+        margin-top: 18px;
     }
     .responsive_doctor_procceses p a{
         color: #000;
@@ -247,7 +152,7 @@ section p {
         width: 96% !important;
     }
     .t_body{
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
   }
 

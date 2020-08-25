@@ -17,12 +17,9 @@ body{
   text-align: center;
 }
 .profile .profile_picture img{
-    width:100px;
-    height: 100px;
     border-radius: 10%;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 168px;
+    height: 200px;
     box-shadow: 0px 0px 10px;
     position: relative;
     top: -77px;
@@ -61,5 +58,7 @@ body{
     width: fit-content;
     padding: 1.5%;
     background-color: black;
+    font-size: 15px;
+    font-family: auto;
     
 }

@@ -58,10 +58,10 @@ include "../controllers/Auth.php";
                         <input type="password" name="user_confpassword" class="form-control" placeholder="confir mpassword" > 
                     </div>
                 </div>
-                    <div class="form-group">
-                        <input type="file" name="user_picture" class="costum file" > 
-                        <input type="hidden" name="user_status" value="user">
-                    </div>
+                <div class="form-group">
+                    <input type="file" name="user_picture" class="costum file" > 
+                    <input type="hidden" name="user_status" value="patient">
+                </div>
                 
                 <div class="form-group">
                 <button name="signup" class="btn btn-success btn-block">Sign up</button>

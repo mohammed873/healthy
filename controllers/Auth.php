@@ -53,10 +53,12 @@ if (isset($_POST['login'])) {
     $error = $user->loginvalidation($user_email,$user_password,$error);
 
     if(count($error)===0){
-        $table = 'users';
+        //loging a patient
+        $table1 = 'users';
         $condition =['user_email' => $user_email];['user_status' => $user_status];
-        $user_data = $user->login($table, $condition );
-        if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'user'){
+
+        $user_data = $user->login($table1, $condition );
+        if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'patient'){
              //login success
              $_SESSION['user_id'] = $user_data['user_id'];
              $_SESSION['user_name'] = $user_data['user_name'];
@@ -66,33 +68,41 @@ if (isset($_POST['login'])) {
              header('location:home.php');
              exit();
         }
-        if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'doctor'){
+        else{
+        $error['login_fail'] = "wrong credition";
+        }
+        
+        //login a doctor
+        $table2 = 'admins';
+        $condition2 =['admin_email' => $user_email];['admin_status' => $user_status];
+        $user_data = $user->login($table2, $condition2 );
+        if($user_data && password_verify($user_password , $user_data['admin_password']) && $user_data['admin_status'] == 'doctor')
+        {
             //login success
-            $_SESSION['user_id'] = $user_data['user_id'];
-            $_SESSION['user_name'] = $user_data['user_name'];
-            $_SESSION['user_email'] = $user_data['user_email'];
-            $_SESSION['user_picture'] = $user_data['user_picture'];
-            $_SESSION['user_status'] = $user_data['user_status'];
+            $_SESSION['admin_id'] = $admin_data['admin_id'];
             header('location:../admin_zone/admin_panel.php');
             exit();
-       }
-        else{
-        $error['login_fail'] = "wrong credition";
         }
-        if($user_data && password_verify($user_password , $user_data['user_password']) && $user_data['user_status'] == 'Secertaire'){
+        else{
+            $error['login_fail'] = "wrong credition";
+        }
+
+
+        //login a doctor
+        $table2 = 'admins';
+        $condition2 =['admin_email' => $user_email];['admin_status' => $user_status];
+        $user_data = $user->login($table2, $condition2 );
+        if($user_data && password_verify($user_password , $user_data['admin_password']) && $user_data['admin_status'] == 'Secertaire')
+        {
             //login success
-            $_SESSION['user_id'] = $user_data['user_id'];
-            $_SESSION['user_name'] = $user_data['user_name'];
-            $_SESSION['user_email'] = $user_data['user_email'];
-            $_SESSION['user_picture'] = $user_data['user_picture'];
-            $_SESSION['user_status'] = $user_data['user_status'];
+            $_SESSION['admin_id'] = $admin_data['admin_id'];
             header('location:../admin_zone/secertaire_panel.php');
             exit();
-       }
-        else{
-        $error['login_fail'] = "wrong credition";
         }
-     }
+        else{
+            $error['login_fail'] = "wrong credition";
+        }
+    }
 } 
 
 ?>

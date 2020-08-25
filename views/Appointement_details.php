@@ -1,6 +1,6 @@
 <?php
 include_once('../controllers/appointement.php');
-$conn = new Chat();
+$conn = new Appointement();
 ?>
 
 <!DOCTYPE html>

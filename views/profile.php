@@ -1,6 +1,6 @@
 <?php
-   include '../controllers/conversation.php';
-   $conn = new Appointement();
+   include '../controllers/patient_details_controler.php';
+   $conn = new Chat();
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +30,8 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="../assests/css/style.css">
     <link rel="stylesheet" href="../assests/css/profile.css">
+    <!-- Font Awesome CSS cdn-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
      <!--::header part start::-->
@@ -96,8 +98,41 @@
 <!-- profile_card part start-->
     <div class="profile">
        <div class="profile_picture">
-           <img src="<?php echo 'uploads/' . $_SESSION['user_picture']; ?>" alt="profile_pic">
+           <img src="<?php echo 'uploads/' . $_SESSION['user_picture']; ?>" alt="profile_pic"><br>         
+           <button style="margin-top: -79px;" class="btn btn-success" id="update_profile">
+              <i class="fa fa-edit"> Edit Profile information</i>
+           </button>
        </div>
+       <div class="bg-warning p-2 profile_update_form" style="display: none;">
+          <form action="" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="patient_id" value="<?= $_SESSION['user_id'];?>">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="username">User name</label>
+                        <input type="text" name="user_name" class="form-control" placeholder="username" > 
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="useremail">user email</label>
+                        <input type="text"  name="user_email" class="form-control" placeholder="email" > 
+                    </div>
+                </div>
+                <div class="row">   
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" name="user_password" class="form-control" placeholder="password" > 
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confpassword"> Confirm password</label>
+                        <input type="password" name="user_confpassword" class="form-control" placeholder="confir mpassword" > 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="user_picture" class="costum file" > 
+                </div>
+                <button type="submit" name="update_profile" class="btn btn-block btn-primary">Update Profile Information</button>
+          </form>
+       </div>
+       <br><br><br>
        <h2>Name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?></span></h2>
        <h2>Email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h2>
        <h2>Status : <span style="color: blue;"><?php echo $_SESSION['user_status'];?></span></h2>
@@ -127,43 +162,44 @@
             <?php  
                 $patient = $_SESSION['user_id'];
                 $con = $conn->connect();
-                // $sql="SELECT chat.patient_id,chat.doctor_id,chat.message,chat.date,users.user_name FROM chat,users WHERE chat.patient_id =users.user_id";
-                $sql="SELECT * from chat WHERE patient_id = '$patient'";
+                $sql="SELECT * from chat WHERE sender_id = '$patient'OR recevier_id = '$patient'";
                 $stm=$con->prepare($sql);
                 $stm->execute();
                 $result=$stm->get_result();
             ?>
             <?php while($row=$result->fetch_assoc()){ ?>
-                <?php
-                    $doctor_id =$row['doctor_id'];
-                    $patient_id =$row['patient_id'];
-                ?>
                 <ul>
                     <div id="chatbox_item">
-                        <li class="text-success"><?php echo $patient_id;?></li>
-                        <li class="text-white"><?=$row['message'];?></li>
+                        <li class="text-success" id="sender_name">
+                            <?=$row['sender_name'];?>
+                        </li>
+                        <li class="text-white">
+                            <?=$row['message'];?>
+                        </li>
                     </div>
-                    <li class="text-warning" ><?=$row['date'];?></li>
-                </ul><br>
+                    <li class="text-warning" >
+                        <?=$row['date'];?>
+                    <li>
+                </ul><br>                
             <?php } ?>
         </div><br>
     <form action="profile.php" method="POST">
-        <input type="hidden" name="patient_id" value="<?php echo $_SESSION['user_id'];?>">
-            <?php  
-                $con = $conn->connect();
-                $sql="SELECT * FROM users WHERE user_status = 'doctor'";
-                $stm=$con->prepare($sql);
-                $stm->execute();
-                $result=$stm->get_result();
-            ?>
-        <select id="doctor_option" class="bg-warning btn-block p-2 " name="doctor_id">
-                 <option value="chose your doctor">chose your doctor</option>
-            <?php while($row=$result->fetch_assoc()){ ?>
-                <option value="<?=$row['user_id'];?>"><?=$row['user_name'];?></option>
-            <?php } ?>
-        </select><br><br>
+        <input type="hidden" name="sender_id" value="<?php echo $_SESSION['user_id'];?>">
+        <input type="hidden" name="sender_name" value="<?php echo $_SESSION['user_name'];?>">
+        <?php  
+            $con = $conn->connect();
+            $sql="SELECT * FROM admins WHERE admin_status = 'doctor'";
+            $stm=$con->prepare($sql);
+            $stm->execute();
+            $result=$stm->get_result();
+        ?>
+        <?php while($row=$result->fetch_assoc()){ ?>
+            <input type="hidden" name="recevier_id" value="<?=$row['admin_id'];?>">
+            <input type="hidden" name="recevier_name" value="<?=$row['admin_name'];?>">
+        <?php } ?>
+        <input type="hidden" name="message_status" value="unread">
         <input type="text" placeholder="Enter a message" class="form-control" name="message"><br>
-        <button type="submit" class="btn-success p-2 btn-block form-control" name="consult">consult</button>
+        <button type="submit" class="btn-success p-2 btn-block form-control" name="consult" id="consult">consult</button>
     </form>
 </div>
 <br><br>
@@ -180,7 +216,7 @@
         ?>
 			<h4 class="text-center bg-primary p-2 text-white">Appointement table</h4>
 			<br>
-		  <table class="table mr-4 table-striped table-light ">
+		  <table class="table mr-4 table-striped table-light">
 			<thead class="thead-dark">
 				<tr>
                     <th>Appointement Number</th>
@@ -322,6 +358,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../assests/js/jquery.validate.min.js"></script>
     <script src="../assests/js/mail-script.js"></script>
 
+    <!-- jquery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+          $('#update_profile').click(function()
+        {
+            $('.profile_update_form').slideToggle(1500);
+        });
+    </script>
+
 </body> 
-</body>
 </html>

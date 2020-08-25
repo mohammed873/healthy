@@ -1,7 +1,6 @@
 <?php
  include_once ('../controllers/admin.php');
- include_once ('../classes/userclass.php');
- $data = new Users();
+ $data = new Admins();
 ?>
 <!DOCTYPE html>
 <head>
@@ -17,9 +16,7 @@
 
 	<!-- Syntax Highlighter -->
 	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
-	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
-
-	 <!-- Bootstrap CSS -->
+	<!-- Bootstrap CSS -->
 	 <link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- Normalize/Reset CSS-->
 	<link rel="stylesheet" href="css/normalize.min.css">
@@ -32,30 +29,49 @@
 </head>
 
 <body>
-
+    <?php
+        $con = $data->connect();
+		$sql="SELECT * FROM admins WHERE admin_status = 'doctor'";
+		$stm=$con->prepare($sql);
+		$stm->execute();
+		$result=$stm->get_result();
+	?>
+	<?php while($row=$result->fetch_assoc()){ ?>
 	<aside class="left-sidebar">
 		<div class="logo" style="text-align: center; padding-left: 0 !important;">
 			<h3 class="text-white">Welcome Doctor 
 				<span class="text-warning">
-				    <?php echo $_SESSION['user_name'];?>
+				    <?= $row['admin_name'];?>
 			    </span>
 			</h3>
 			<hr class="bg-white text-white"><br>
 		</div>
-		
 		<div style="text-align: center;">
-			<h2  style="color: wheat;">profile</h2><br>
-			<img src="<?php echo '../views/uploads/' . $_SESSION['user_picture']; ?>" alt="profile_picture" style="width: 195px;height: 227px;border-radius: 5%;">
+			<img src="<?php echo '../views/uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
 			<br><br>
-			<h6 style="color: white;">name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?> </h4>
-			<br>
-			<h6 style="color: white;">email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h6>
-			<br>
-			<h6 style="color: white;">Status : <span style="color: blue;"><?php echo $_SESSION['user_status'];?></span></h6>
+			<h6 style="color: white;">name : 
+				<span style="color:#f1b608;">
+					<?= $row['admin_name'];?> 
+				</span>
+			</h6>
+			<div id="blank-space"></div>
+			<h6 style="color: white;">email : 
+				<span style="color:#f1b608;">
+				    <?= $row['admin_email'];?> 
+				</span>
+			</h6>
+			<div id="blank-space"></div>
+			<h6 style="color: white;">Status : 
+			    <span style="color:#f1b608;">
+				   <?= $row['admin_status'];?> 
+		        </span>
+			</h6>
+			
 		</div>
 		<br>
-		<div class="doctor_procceses">
-		<p><a href="#add_admin">add admin</a></p>
+		<div class="doctor_procceses" style="z-index: 1;">
+		    <p><a href="admin_profile_info.php">Edit profile Info</a></p>
+		    <p><a href="#add_admin">add admin</a></p>
 		    <p><a href="#admins">admins</a></p>
 			<p><a href="#patients">patients</a></p>
 	        <p><a href="#contact_messages">contact messages</a></p>
@@ -70,24 +86,35 @@
 		<div class="responsive_logo">
 				<h3 class="text-white">Welcome Doctor 
 					<span class="text-warning">
-						<?php echo $_SESSION['user_name'];?>
+						<?= $row['admin_name'];?>
 					</span>
 				</h3>
 				<hr class="bg-white text-white"><br>
 		</div>
 		<div class="responsive_panel">
-			<br><br><br>
 			<div class="responsive_doctor_profile">
-				<h2  style="color: wheat;">profile</h2><br>
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTreksTEerNOVl1wm7JRykQifXUI_RKimR8jjtzG-e1AcyrTajW&usqp=CAU" alt="profile_picture" style="width: 100px; height: 100px;">
+			    <img src="<?php echo '../views/uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
 				<br><br>
-				<h5 style="color: white;">name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?> </h5>
-				<h5 style="color: white;">email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h5>
-				<h5 style="color: white;">Status : <span style="color: blue;"><?php echo $_SESSION['user_status'];?></span></h5>
+				<h6 style="color: white;">name : 
+				    <span style="color:  #f1b608;">
+					   <?= $row['admin_name'];?> 
+				    </span>
+				</h6>
+				<h6 style="color: white;">email : 
+					<span style="color:  #f1b608;">
+					    <?= $row['admin_email'];?>
+					</span>
+				</h6>
+				<h6 style="color: white;">Status : 
+					<span style="color:  #f1b608;">
+					    <?= $row['admin_status'];?>
+				    </span>
+				</h6>
 			</div>
 			<br><br>
 			<div class="responsive_doctor_procceses">
 				<div id="inner">
+					<p><a href="admin_profile_info.php">Edit profile Info</a></p>
 				    <p><a href="#add_admin">add admin</a></p>
 					<p><a href="#admins">admins</a></p>
 					<p><a href="#patients">patients</a></p>
@@ -97,13 +124,14 @@
 			<div id="responsive_admin_logout_btn">
 				<a href="../views/index.php">log out</a>
 			</div>
-	    </div>
+		</div>
+	<?php } ?>
 	</div>
 
 	<div class="blank-div"></div>
 
 	<!-- the body section -->
-	<div class="right_body" style="width: 82%;margin-left: 18%;">
+	<div class="right_body">
 	 <br><br>
 	 
     <!-- adding an admin -->
@@ -128,31 +156,30 @@
 				<form action="admin_panel.php" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="username">Username</label>
-							<input type="text" name="user_name" class="form-control" placeholder="username" value="<?php echo $user_name; ?>" > 
+							<label for="adminname">admin name</label>
+							<input type="text" name="admin_name" class="form-control" placeholder="admin name" value="<?php echo $admin_name; ?>" > 
 						</div>
 						<div class="form-group col-md-6">
-							<label for="useremail">useremail</label>
-							<input type="text"  name="user_email" class="form-control" placeholder="email" value="<?php echo $user_email; ?>"> 
+							<label for="adminemail">admin email</label>
+							<input type="text"  name="admin_email" class="form-control" placeholder="email" value="<?php echo $admin_email; ?>"> 
 						</div>
 					</div>
 					<div class="row">   
 						<div class="form-group col-md-6">
 							<label for="password">Password</label>
-							<input type="password" name="user_password" class="form-control" placeholder="password" > 
+							<input type="password" name="admin_password" class="form-control" placeholder="password" > 
 						</div>
 						<div class="form-group col-md-6">
 							<label for="confpassword"> Confirm password</label>
-							<input type="password" name="user_confpassword" class="form-control" placeholder="confir mpassword"> 
+							<input type="password" name="admin_confpassword" class="form-control" placeholder="confirm password"> 
 						</div>
 					</div>
 						<div class="form-group">
-							<input type="file" name="user_picture" class="costum file" > 
+							<input type="file" name="admin_picture" class="costum file" > 
 						</div>
 						<div class="form-group">
-							<select name="user_status" class="bg-secondary p-2 text-white" style="width: 100%;">
+							<select name="admin_status" class="bg-secondary p-2 text-white" style="width: 100%;">
 							    <option value="choose the status of the admin">Choose The Status of The Admin</option>
-								<option value="admin">DOCTOR</option>
 								<option value="Secertaire">Secertaire</option>
 							</select>
 						</div>
@@ -170,7 +197,7 @@
 	   <div class="col-md-8" style="margin:auto;height:927px;overflow-y:scroll;" id="admins">
 			<?php
 				$con = $data->connect();
-				$sql="SELECT * FROM users WHERE user_status != 'user'";
+				$sql="SELECT * FROM admins";
 				$stm=$con->prepare($sql);
 				$stm->execute();
 				$result=$stm->get_result();
@@ -190,11 +217,11 @@
 			<tbody class="t_body">
 			<?php while($row=$result->fetch_assoc()){ ?>
 				<tr>
-					<td><?=$row['user_name'];?></td>
-					<td><?=$row['user_email'];?></td>
-					<td><?=$row['user_status'];?></td>
+					<td><?=$row['admin_name'];?></td>
+					<td><?=$row['admin_email'];?></td>
+					<td><?=$row['admin_status'];?></td>
 					<td>
-                    <a href="admin_panel.php?delete=<?=$row['user_id']; ?>" class="badge badge-danger p-3" onclick="return confirm('Do you want to delete this admin')">delete</a>
+                    <a href="admin_panel.php?delete=<?=$row['admin_id']; ?>" class="badge badge-danger p-3" onclick="return confirm('Do you want to delete this admin')">delete</a>
                     </td>
 					
 				<?php } ?>
@@ -207,7 +234,7 @@
 		<div class="col-md-8" style="margin: auto;height:927px;overflow-y:scroll;" id="patients">
 			<?php
 				$con = $data->connect();
-				$sql="SELECT * FROM users WHERE user_status = 'user'";
+				$sql="SELECT * FROM users";
 				$stm=$con->prepare($sql);
 				$stm->execute();
 				$result=$stm->get_result();
@@ -270,6 +297,7 @@
 				<?php } ?>
 			</tbody>
           </table>
-    </div>
+	</div>
+
 </body>	
 </html>

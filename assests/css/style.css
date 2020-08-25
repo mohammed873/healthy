@@ -242,39 +242,14 @@ a:focus, .button:focus, button:focus, .btn:focus {
   transition: 1s;
 }
 
-/* line 141, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-.section_tittle {
-  margin-bottom: 84px;
-}
 
-@media (max-width: 576px) {
-  /* line 141, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle {
-    margin-bottom: 50px;
-  }
-}
 
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  /* line 141, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle {
-    margin-bottom: 50px;
-  }
-}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* line 141, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle {
-    font-size: 50px;
-    margin-bottom: 50px;
-  }
-}
 
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
-  /* line 141, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle {
-    margin-bottom: 50px;
-  }
-}
+
+
+
+
 
 /* line 156, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
 .section_tittle h2 {
@@ -313,33 +288,6 @@ a:focus, .button:focus, button:focus, .btn:focus {
   font-size: 14px;
 }
 
-@media (max-width: 576px) {
-  /* line 174, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle p {
-    margin-bottom: 10px;
-  }
-}
-
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  /* line 174, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle p {
-    margin-bottom: 10px;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* line 174, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle p {
-    margin-bottom: 10px;
-  }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
-  /* line 174, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
-  .section_tittle p {
-    margin-bottom: 10px;
-  }
-}
 
 /* line 194, ../../01 cl html template/New folder/May 2019/179 Medisen Medical/179 Medisen Medical -Template/sass/_common.scss */
 ul {
