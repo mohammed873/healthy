@@ -38,12 +38,22 @@ class Chat extends DB
 
 class Update_profile extends DB
 {
-    public function Update_profile_info ($patient_id,$user_name,$user_email,$user_password,$user_picture)
+    public function Update_profile_info ($user_id,$user_name,$user_email,$user_password,$user_picture)
     {
-        $sql = "UPDATE users SET (`user_name`,`user_email`,`user_password`,`user_picture`) VALUES (`$user_name`,`$user_email`,`$user_password`,`$user_picture`) WHERE user_id = '$patient_id'";
+        $Update_query = "UPDATE  `users` SET user_name = '$user_name', user_email = '$user_email', user_password = '$user_password', user_picture = '$user_picture' WHERE user_id = '$user_id'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->connect()->query($Update_query);
         return $result;
+    }
+
+    public function save_profile_picture()
+    {
+        $user_picture = $_FILES['user_picture']['name'];
+        $upload = "../views/uploads/" . $user_picture;
+        //storing pictures to the uploads file
+        move_uploaded_file($_FILES['user_picture']['tmp_name'], $upload);
+
+        return $user_picture;
     }
 }
 

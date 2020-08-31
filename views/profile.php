@@ -94,48 +94,74 @@
         </div>
     </section>
     <!-- breadcrumb start-->
-
+    <br>
+    <?php if(isset($_SESSION['message'])): ?>
+                <div class="alert alert-success">
+                    <h5 class="text-center"><?php 
+                    echo $_SESSION['message'];
+                    unset($_SESSION['message']);
+                    ?></h5>
+                </div>
+    <?php endif; ?>
+    <br><br><br>
 <!-- profile_card part start-->
     <div class="profile">
+    <?php
+        $patient_id = $_SESSION['user_id'];
+
+        $con = $conn->connect();
+        $sql="SELECT * FROM users WHERE user_id = '$patient_id'";
+        $stm=$con->prepare($sql);
+        $stm->execute();
+        $result=$stm->get_result();
+    ?>
+        <?php while($row=$result->fetch_assoc()){ ?>
        <div class="profile_picture">
-           <img src="<?php echo 'uploads/' . $_SESSION['user_picture']; ?>" alt="profile_pic"><br>         
+           <img src="<?= 'uploads/' . $row['user_picture']; ?>" alt="profile_pic"><br>         
            <button style="margin-top: -79px;" class="btn btn-success" id="update_profile">
               <i class="fa fa-edit"> Edit Profile information</i>
            </button>
        </div>
        <div class="bg-warning p-2 profile_update_form" style="display: none;">
           <form action="" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="patient_id" value="<?= $_SESSION['user_id'];?>">
                 <div class="row">
+                    <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'];?>">
                     <div class="form-group col-md-6">
                         <label for="username">User name</label>
-                        <input type="text" name="user_name" class="form-control" placeholder="username" > 
+                        <input type="text" name="user_name" class="form-control" placeholder="username" id="user-name" value="<?= $row['user_name'];?>"> 
+                        <span id="name-error" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="useremail">user email</label>
-                        <input type="text"  name="user_email" class="form-control" placeholder="email" > 
+                        <input type="text"  name="user_email" class="form-control" placeholder="email" id="user-email" value="<?= $row['user_email'];?>"> 
+                        <span id="email-error" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">   
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
-                        <input type="password" name="user_password" class="form-control" placeholder="password" > 
+                        <input type="password" name="user_password" class="form-control" placeholder="password" id="user-password" value="<?= $row['user_password'];?>">
+                        <span class="password-error text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confpassword"> Confirm password</label>
-                        <input type="password" name="user_confpassword" class="form-control" placeholder="confir mpassword" > 
+                        <input type="password" name="user_confpassword" class="form-control" placeholder="confirm password" id="confirm-password" value="<?= $row['user_password'];?>"> 
+                        <span class="password-error text-danger" ></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="file" name="user_picture" class="costum file" > 
+                   <label for="user_picture"> Chose Picture</label>
+                   <input type="file" name="user_picture" class="form-control" id="user-picture"> 
+                   <span id="picture-error" class="text-danger"></span>
                 </div>
-                <button type="submit" name="update_profile" class="btn btn-block btn-primary">Update Profile Information</button>
+                <button type="submit" name="update_profile" class="btn btn-block btn-primary" id="update-profile">Update Profile Information</button>
           </form>
        </div>
        <br><br><br>
-       <h2>Name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?></span></h2>
-       <h2>Email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h2>
-       <h2>Status : <span style="color: blue;"><?php echo $_SESSION['user_status'];?></span></h2>
+       <h2>Name : <span style="color: blue;"><?= $row['user_name'];?></span></h2>
+       <h2>Email : <span style="color: blue;"><?= $row['user_email'];?></span></h2>
+       <h2>Status : <span style="color: blue;"><?= $row['user_status'];?></span></h2>
+    <?php } ;?>
     </div><br><br>
 <!-- profile_card part ends-->
 
@@ -360,12 +386,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jquery cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-          $('#update_profile').click(function()
-        {
-            $('.profile_update_form').slideToggle(1500);
-        });
-    </script>
+    <script src="../assests/js/profile.js"></script>
 
 </body> 
 </html>

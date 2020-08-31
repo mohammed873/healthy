@@ -31,7 +31,7 @@ include "../controllers/Auth.php";
             <br>
             <form action="index.php" method="POST">
                 <div class="form-group">
-                  <label>useremail</label>
+                  <label>user email</label>
                   <input type="text" class="form-control" name="user_email" placeholder="user email" value="<?php echo $user_email; ?>">
                 </div>
                 <div class="form-group">

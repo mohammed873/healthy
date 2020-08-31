@@ -3,7 +3,7 @@ include('../classes/admin_class.php');
 
 
 $admin = new Admins();
-$edit = new edit_profile();
+$edit = new Edit_Doctor_Profile();
 $error = array();
 
 $admin_name = '';
@@ -95,15 +95,33 @@ if(isset($_GET['details'])){
     $appointement_status=$row['appointement_status'];
 }
 
-//updating doctor profile picture
-if(isset($_POST['edit_pic'])){
-   $user_picture = $_POST['user_picture'];
-
-   //updating the profile picture
-   $edit->update_profile_pic($user_picture);
-    //sending an update confirmation message to the user
-     $_SESSION['message'] = "Picture Has Changed Successfully";
+//updating doctor profile information
+if(isset($_POST['update_info']))
+{
+   $doctor_name = htmlspecialchars($_POST['doctor_name']);
+   $doctor_email = htmlspecialchars($_POST['doctor_email']);
+   $doctor_password = $_POST['doctor_password'];
+   $doctor_confpassword = $_POST['doctor_confpassword'];
+   $doctor_phone =$_POST['doctor_phone'];
+   $doctor_linkdin=$_POST['doctor_linkdin'];
+   $years_experience =$_POST['years_experience'];
+   $surgeries_number=$_POST['surgeries_number'];
+   $doctor_specialization =$_POST['doctor_specialization'];
+   $about_doctor=$_POST['about_doctor'];
+   
+  
+    
+   //hashing the password before saving the data to the database
+    $doctor_password = password_hash($doctor_password, PASSWORD_DEFAULT);
+   //updating records
+    $edit->Update_profile_info($doctor_name,$doctor_email,$doctor_password,$doctor_phone,$doctor_linkdin, $years_experience,$surgeries_number,$doctor_specialization,$about_doctor);
+    // save the new profile picture
+     // $edit->save_profile_Picture();
+    //send confirmation alert
+    $_SESSION['message'] = "Your Profile information has been updated successfuly"; 
+   
 }
+
 
 
 

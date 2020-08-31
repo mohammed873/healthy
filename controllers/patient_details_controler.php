@@ -58,25 +58,27 @@
         $_SESSION['message'] = "Your note has been sent successfuly";       
     }
 
+
+    // updating the patients profiles information
     if(isset($_POST['update_profile']))
     {
-       $patient_id=$_POST['$patient_id'];
+       $user_id=$_POST['user_id'];
        $user_name = htmlspecialchars($_POST['user_name']);
        $user_email = htmlspecialchars($_POST['user_email']);
        $user_password = $_POST['user_password'];
        $user_confpassword = $_POST['user_confpassword'];
-       $user_picture = $_FILES['user_picture'];
-
-       $profile->Update_profile_info($patient_id,$user_name,$user_email,$user_password,$user_picture);
-
-       echo $patient_id;
-       echo $user_name;
-       echo $user_email;
-       echo $user_password;
-       echo $user_picture;
+       $user_picture=$_FILES['user_picture']['name'];
+        
+       //hashing the password before saving the data to the database
+        $user_password = password_hash($user_password, PASSWORD_DEFAULT);
+       //updating records
+        $profile->Update_profile_info($user_id,$user_name,$user_email,$user_password,$user_picture);
+       // save the new profile picture
+        $profile->save_profile_picture();
+        //send confirmation alert
+        $_SESSION['message'] = "Your Profile information has been updated successfuly"; 
+       
     }
 
     
-
-
 ?>

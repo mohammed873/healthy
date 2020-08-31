@@ -44,7 +44,7 @@ include "../controllers/Auth.php";
                         <input type="text" value="<?php echo $user_name; ?>" name="user_name" class="form-control" placeholder="username" > 
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="useremail">user email</label>
+                        <label for="useremail">User email</label>
                         <input type="text" value="<?php echo $user_email; ?>"  name="user_email" class="form-control" placeholder="email" > 
                     </div>
                 </div>
@@ -55,14 +55,15 @@ include "../controllers/Auth.php";
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confpassword"> Confirm password</label>
-                        <input type="password" name="user_confpassword" class="form-control" placeholder="confir mpassword" > 
+                        <input type="password" name="user_confpassword" class="form-control" placeholder="confirm password" > 
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="file" name="user_picture" class="costum file" > 
+                    <label for="user_picture">Choose picture</label>
+                    <input type="file" name="user_picture" class="form-control" style="height: 56px;"> 
                     <input type="hidden" name="user_status" value="patient">
                 </div>
-                
+                <br>
                 <div class="form-group">
                 <button name="signup" class="btn btn-success btn-block">Sign up</button>
                 <br>

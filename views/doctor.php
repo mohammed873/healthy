@@ -123,49 +123,51 @@
                           <div class="doctor_info d-flex justify-content-spacearound">
 
                     </div>
-                        <div style="text-align: initial;">
-                            <h5 class="text-primary">Doctor Name: 
-                                <span style="font-weight: bold; color:black">
-                                   <?=$row['admin_name'];?>
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">Doctor Email: 
-                                <span style="font-weight: bold; color:black">
-                                   <?=$row['admin_email'];?>
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">Doctor Specialization: 
-                                <span style="font-weight: bold; color:black">
-                                   heart problems
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">phone number: 
-                                <span style="font-weight: bold; color:black">
-                                   857878598948
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">linkdin Profile: 
-                                <span style="font-weight: bold; color:black">
-                                   www.duhduhdudh.com
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">Years of Experience: 
-                                <span style="font-weight: bold; color:black">
-                                   12
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">Sergeries Number: 
-                                <span style="font-weight: bold; color:black">
-                                   12
-                                </span>
-                            </h5>
-                            <h5 class="text-primary">More About Doctor: 
-                                <span style="font-weight: bold; color:black">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                                </span>
-                            </h5>
-                        </div>
-                    <?php } ?>    
+                    <div style="text-align: initial;">
+                        <h5 class="text-primary">Doctor Name: 
+                            <span style="font-weight: bold; color:black">
+                                <?=$row['admin_name'];?>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">Doctor Email: 
+                            <span style="font-weight: bold; color:black">
+                                <?=$row['admin_email'];?>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">Doctor Phone Number: 
+                            <span style="font-weight: bold; color:black">
+                               <?=$row['doctor_phone'];?>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">linkdin Profile: 
+                            <span style="font-weight: bold; color:black">
+                                <a href="<?=$row['doctor_linkdin'];?>" class="text-dark">
+                                    <?=$row['doctor_linkdin'];?>
+                                </a>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">Years of Experience: 
+                            <span style="font-weight: bold; color:black">
+                                <?=$row['years_experience'] . ' years';?>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">Sergeries Number: 
+                            <span style="font-weight: bold; color:black">
+                               <?=$row['surgeries_number'] . ' times';?>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">Doctor Specialization: 
+                            <span style="font-weight: bold; color:black">
+                                <?=$row['doctor_specialization'];?>
+                            </span>
+                        </h5>
+                        <h5 class="text-primary">More About Doctor: 
+                            <span style="font-weight: bold; color:black">
+                                <?=$row['about_doctor'];?>
+                            </span>
+                        </h5>
+                    </div>
+            <?php } ?>    
             </div>
         </div>
     </section>

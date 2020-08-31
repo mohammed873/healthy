@@ -64,14 +64,24 @@ class Admins extends DB
     }
 }
 
-class edit_profile extends DB{
-    public function update_profile_pic ($user_picture)
+class Edit_Doctor_Profile extends DB{
+    public function Update_profile_info ($doctor_name,$doctor_email,$doctor_password,$doctor_phone,$doctor_linkdin, $years_experience,$surgeries_number,$doctor_specialization,$about_doctor)
     {
-        $sql = "UPDATE users SET user_picture ='$user_picture' WHERE user_status = 'doctor'";
+        $Update_query = "UPDATE  `admins` SET admin_name = '$doctor_name', admin_email = '$doctor_email', admin_password = '$doctor_password', doctor_phone = '$doctor_phone', doctor_linkdin = '$doctor_linkdin', years_experience = '$years_experience', surgeries_number = '$surgeries_number', doctor_specialization = '$doctor_specialization', about_doctor = '$about_doctor' WHERE admin_status = 'doctor'";
 
-        $result = $this->connect()->query($sql);
+        $result = $this->connect()->query($Update_query);
         return $result;
     }
+
+    // public function save_profile_Picture()
+    // {
+    //     $doctor_picture = $_FILES['doctor_picture']['name'];
+    //     $upload = "../views/uploads/" . $doctor_picture;
+    //     //storing pictures to the uploads file
+    //     move_uploaded_file($_FILES['doctor_picture']['tmp_name'], $upload);
+
+    //     return $doctor_picture;
+    // }
     
 
 }

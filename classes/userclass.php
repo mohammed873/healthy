@@ -100,22 +100,4 @@ class Users extends DB
         $records = $stmt->get_result()->fetch_assoc();
         return $records;
     }
-
-    function admin_login()
-    {
-        
-    }
-
-}
-
-class edit_profile extends DB{
-    public function update_profile_pic ($user_picture)
-    {
-        $sql = "UPDATE users SET user_picture ='$user_picture' WHERE user_status = 'doctor'";
-
-        $result = $this->connect()->query($sql);
-        return $result;
-    }
-    
-
 }

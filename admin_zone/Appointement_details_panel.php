@@ -216,7 +216,7 @@
         </form>
         <br><br>
         <h4> 
-            <a href="secertaire_panel.php" class="text-success">Back To Profile Page</a>
+            <a href="secertaire_panel.php" class="text-success">Back To Secertaire Page</a>
         </h4>
     </div>
     </div>

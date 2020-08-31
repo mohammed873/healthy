@@ -146,7 +146,7 @@
 
         </div>
 
-        <div class="col-md-5  ml-5">
+        <div class="col-md-5 ">
           <div class="media contact-info" style="position: relative;left: 26%;top: 19%;">
             <span class="contact-info__icon"><i class="ti-home"></i></span>
             <div class="media-body">
@@ -169,7 +169,8 @@
             </div>
           </div>
         </div>
-      </div>
+         </div>
+      <br><br>
     </div>
 
 

@@ -137,6 +137,7 @@
     <!-- adding an admin -->
     <div class="container big-box col-md-8 " style="padding: 1%;background-color: #ffc107; box-shadow: 0px 0px 10px;" id="add_admin">
 			<h2 class="text-center h2">New admin</h2>
+			<hr class="bg-primary">
 				<?php if(count($error) > 0): ?>
 					<div class="alert alert-danger">
 						<?php foreach($error as $error): ?>
@@ -174,9 +175,10 @@
 							<input type="password" name="admin_confpassword" class="form-control" placeholder="confirm password"> 
 						</div>
 					</div>
-						<div class="form-group">
-							<input type="file" name="admin_picture" class="costum file" > 
-						</div>
+					    <div class="form-group">
+							<label for="user_picture">Choose picture</label>
+							<input type="file" name="admin_picture" class="form-control" style="height: 44px;"> 
+                        </div>
 						<div class="form-group">
 							<select name="admin_status" class="bg-secondary p-2 text-white" style="width: 100%;">
 							    <option value="choose the status of the admin">Choose The Status of The Admin</option>
