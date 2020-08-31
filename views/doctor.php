@@ -116,7 +116,7 @@
                             $result=$stm->get_result();
                        ?>
                        <?php while($row=$result->fetch_assoc()){ ?>
-                          <img src="<?php echo 'uploads/' . $row['admin_picture']; ?>" alt="profile_pic" style="width: 210px;">
+                          <img src="<?php echo '../uploads/' . $row['admin_picture']; ?>" alt="profile_pic" style="width: 210px;">
                           <hr class="bg-primary">
                           <hr class="bg-primary">
                           <br>
@@ -288,8 +288,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../assests/js/jquery.ajaxchimp.min.js"></script>
     <script src="../assests/js/jquery.form.js"></script>
     <script src="../assests/js/jquery.validate.min.js"></script>
-    <script src="../assests/js/mail-script.js"></script>
- 
 </body>
 
 </html>

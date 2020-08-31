@@ -57,7 +57,7 @@ class Admins extends DB
     public function save_profile_picture()
     {
         $admin_picture = $_FILES['admin_picture']['name'];
-        $upload = "../views/uploads/" . $admin_picture;
+        $upload = "../uploads/" . $admin_picture;
         //storing pictures to the uploads file
         move_uploaded_file($_FILES['admin_picture']['tmp_name'], $upload);
         return $admin_picture;
@@ -65,23 +65,23 @@ class Admins extends DB
 }
 
 class Edit_Doctor_Profile extends DB{
-    public function Update_profile_info ($doctor_name,$doctor_email,$doctor_password,$doctor_phone,$doctor_linkdin, $years_experience,$surgeries_number,$doctor_specialization,$about_doctor)
+    public function Update_profile_info ($doctor_name,$doctor_email,$doctor_password,$doctor_phone,$doctor_linkdin, $years_experience,$surgeries_number,$doctor_specialization,$about_doctor,$admin_picture)
     {
-        $Update_query = "UPDATE  `admins` SET admin_name = '$doctor_name', admin_email = '$doctor_email', admin_password = '$doctor_password', doctor_phone = '$doctor_phone', doctor_linkdin = '$doctor_linkdin', years_experience = '$years_experience', surgeries_number = '$surgeries_number', doctor_specialization = '$doctor_specialization', about_doctor = '$about_doctor' WHERE admin_status = 'doctor'";
+        $Update_query = "UPDATE  `admins` SET admin_name = '$doctor_name', admin_email = '$doctor_email', admin_password = '$doctor_password', doctor_phone = '$doctor_phone', doctor_linkdin = '$doctor_linkdin', years_experience = '$years_experience', surgeries_number = '$surgeries_number', doctor_specialization = '$doctor_specialization', about_doctor = '$about_doctor' ,admin_picture = '$admin_picture'WHERE admin_status = 'doctor'";
 
         $result = $this->connect()->query($Update_query);
         return $result;
     }
 
-    // public function save_profile_Picture()
-    // {
-    //     $doctor_picture = $_FILES['doctor_picture']['name'];
-    //     $upload = "../views/uploads/" . $doctor_picture;
-    //     //storing pictures to the uploads file
-    //     move_uploaded_file($_FILES['doctor_picture']['tmp_name'], $upload);
+    public function save_profile_Picture()
+    {
+        $admin_picture = $_POST['admin_picture'];
+        $upload = "../uploads/" . $admin_picture;
+        //storing pictures to the uploads file
+        move_uploaded_file($_POST['admin_picture'], $upload);
 
-    //     return $doctor_picture;
-    // }
+        return $admin_picture;
+    }
     
 
 }

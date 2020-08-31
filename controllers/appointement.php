@@ -25,7 +25,7 @@
             $appointement->make_appointement($user_id,$doctor_id,$user_name,$user_email, $service_type,$time,$message,$appointement_status);
 
             //sending appointement confiramation
-            $_SESSION['message'] = "Your Appointement Made Successfuly <a href = 'profile.php'>check ur profile</a>";
+            $_SESSION['message'] = "Your Appointement Made Successfuly <a href = 'profile.php'>check your profile</a>";
             //empty the inputs fields after submitting
             $user_name = '';
             $user_email = '';

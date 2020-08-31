@@ -82,7 +82,7 @@ $('#update-info').click(function(e){
     }
     else if($('#doctor-password').val() !== $('#confirm-password').val()){
       e.preventDefault();
-       $('.password-error').html("password fuck ");
+       $('.password-error').html("password don't match ");
     }
     else{
         $('.password-error').html("");

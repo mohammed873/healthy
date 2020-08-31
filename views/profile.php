@@ -1,5 +1,5 @@
 <?php
-   include '../controllers/patient_details_controler.php';
+   include ('../controllers/patient_details_controler.php');
    $conn = new Chat();
 ?>
 
@@ -117,7 +117,7 @@
     ?>
         <?php while($row=$result->fetch_assoc()){ ?>
        <div class="profile_picture">
-           <img src="<?= 'uploads/' . $row['user_picture']; ?>" alt="profile_pic"><br>         
+           <img src="<?= '../uploads/' . $row['user_picture']; ?>" alt="profile_pic"><br>         
            <button style="margin-top: -79px;" class="btn btn-success" id="update_profile">
               <i class="fa fa-edit"> Edit Profile information</i>
            </button>
@@ -358,35 +358,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- footer part end-->
 
-    <!-- jquery plugins here-->
-
-    <script src="../assests/js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="../assests/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="../assests/js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="../assests/js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="../assests/js/swiper.min.js"></script>
-    <!-- swiper js -->
-    <script src="../assests/js/masonry.pkgd.js"></script>
-    <!-- particles js -->
-    <script src="../assests/js/owl.carousel.min.js"></script>
-    <script src="../assests/js/jquery.nice-select.min.js"></script>
-    <!-- swiper js -->
-    <script src="../assests/js/slick.min.js"></script>
-    <script src="../assests/js/jquery.counterup.min.js"></script>
-    <script src="../assests/js/waypoints.min.js"></script>
-    <!-- contact js -->
-    <script src="../assests/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../assests/js/jquery.form.js"></script>
-    <script src="../assests/js/jquery.validate.min.js"></script>
-    <script src="../assests/js/mail-script.js"></script>
 
     <!-- jquery cdn -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../assests/js/profile.js"></script>
-
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+  
 </body> 
 </html>

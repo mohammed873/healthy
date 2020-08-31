@@ -49,7 +49,7 @@ class Update_profile extends DB
     public function save_profile_picture()
     {
         $user_picture = $_FILES['user_picture']['name'];
-        $upload = "../views/uploads/" . $user_picture;
+        $upload = "../uploads/" . $user_picture;
         //storing pictures to the uploads file
         move_uploaded_file($_FILES['user_picture']['tmp_name'], $upload);
 

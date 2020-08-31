@@ -13,15 +13,12 @@
 	<!-- <link rel="shortcut icon" href="img/favicon.png"> -->
 
 	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
-
-	<!-- Syntax Highlighter -->
-	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
 	<!-- Bootstrap CSS -->
-	 <link rel="stylesheet" href="css/bootstrap.min.css">
+	 <link rel="stylesheet" href="assests/css/bootstrap.min.css">
 	<!-- Normalize/Reset CSS-->
-	<link rel="stylesheet" href="css/normalize.min.css">
+	<link rel="stylesheet" href="assests/css/normalize.min.css">
 	<!-- Main CSS-->
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="assests/css/main.css">
 	<!--  bootstrap cdn link-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<!-- Font Awesome CSS cdn-->
@@ -47,7 +44,7 @@
 			<hr class="bg-white text-white"><br>
 		</div>
 		<div style="text-align: center;">
-			<img src="<?php echo '../views/uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
+			<img src="<?php echo '../uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
 			<br><br>
 			<h6 style="color: white;">name : 
 				<span style="color:#f1b608;">
@@ -93,7 +90,7 @@
 		</div>
 		<div class="responsive_panel">
 			<div class="responsive_doctor_profile">
-			    <img src="<?php echo '../views/uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
+			    <img src="<?php echo '../uploads/' . $row['admin_picture']; ?>" alt="profile_picture" style="width: 150px;height: 190px;border-radius: 5%;">
 				<br><br>
 				<h6 style="color: white;">name : 
 				    <span style="color:  #f1b608;">

@@ -1,5 +1,5 @@
 <?php
-include('../classes/admin_class.php');
+include_once ('../classes/admin_class.php');
 
 
 $admin = new Admins();
@@ -36,7 +36,7 @@ if (isset($_POST['add_admin'])) {
         //hashing the password before saving the data to the database
         $admin_password = password_hash($admin_password, PASSWORD_DEFAULT);
         //saving the profile picture
-        $admin_picture = $admin->save_profile_picture();     
+        $admin_picture = $admin->save_profile_picture($admin_picture);     
         // registering a new admin and sending the data to the database
         $admin->add_new_admin($admin_name, $admin_email, $admin_password, $admin_picture, $admin_status);
         //sending a register confirmation message to the admin
@@ -108,15 +108,16 @@ if(isset($_POST['update_info']))
    $surgeries_number=$_POST['surgeries_number'];
    $doctor_specialization =$_POST['doctor_specialization'];
    $about_doctor=$_POST['about_doctor'];
+   $admin_picture = $_POST['admin_picture'];
    
   
     
    //hashing the password before saving the data to the database
     $doctor_password = password_hash($doctor_password, PASSWORD_DEFAULT);
    //updating records
-    $edit->Update_profile_info($doctor_name,$doctor_email,$doctor_password,$doctor_phone,$doctor_linkdin, $years_experience,$surgeries_number,$doctor_specialization,$about_doctor);
+    $edit->Update_profile_info($doctor_name,$doctor_email,$doctor_password,$doctor_phone,$doctor_linkdin, $years_experience,$surgeries_number,$doctor_specialization,$about_doctor,$admin_picture);
     // save the new profile picture
-     // $edit->save_profile_Picture();
+     $edit->save_profile_picture();
     //send confirmation alert
     $_SESSION['message'] = "Your Profile information has been updated successfuly"; 
    

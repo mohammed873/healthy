@@ -9,13 +9,13 @@ $conn = new Chat();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>patient_detail</title>
     <!-- Font Awesome CSS-->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="assests/css/font-awesome.min.css">
 	 <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="assests/css/bootstrap.min.css">
      <!--bootstrap cdn link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- custom css for the patient_detail -->
-    <link rel="stylesheet" href="css/patient_detail.css">
+    <link rel="stylesheet" href="assests/css/patient_detail.css">
 </head>
 <body>
     <div class="text-center p-2 bg-dark" style="position: fixed;width: 100%; z-index:99">
@@ -40,7 +40,7 @@ $conn = new Chat();
         <br>
         <div class="bg-warning p-2 patient_notes" style="display:none">
             <div class="text-center">
-                <img src="<?php echo '../views/uploads/' . $patient_picture; ?>" alt="user picture" style="width:45%;">
+                <img src="<?php echo '../uploads/' . $patient_picture; ?>" alt="user picture" style="width:45%;">
                 <br><br>
                 <p>User Name : 
                     <span  class="text-primary">
@@ -138,25 +138,6 @@ $conn = new Chat();
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
-<script>
-    // $(document).ready(function(){
-    //     $('body').load(function(){
-    //        $('#chatbox').scrollTop(40000);
-    //     });
-    // });
-    $('#add_note').click(function(){
-            $('.patient_notes').slideToggle(1500);
-	});
-
-    $('#send_note').click(function(e){
-        if ($("#note").val() === '') {
-            e.preventDefault();
-            $('#error').html('Note fiels must not be empty');
-        }
-        else{
-            //send data
-        }
-	});
-</script>          
+<script src="assests/js/patient_details.js"></script>         
 </body>
 </html>

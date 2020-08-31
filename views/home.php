@@ -1,6 +1,14 @@
 <?php
   include_once ('../controllers/appointement.php');
   $conn = new Appointement();
+
+//   if (!isset($_SESSION['user_id'])) {
+//     header('Location: index.php');
+//   }
+if (isset($_SESSION['user_id'])) {
+    session_destroy();
+    header('location;index.php');
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -329,13 +337,13 @@
                                 </div>
                                 <?php  
                                     $con = $conn->connect();
-                                    $sql="SELECT * FROM users WHERE user_status = 'doctor'";
+                                    $sql="SELECT * FROM admins WHERE admin_status = 'doctor'";
                                     $stm=$con->prepare($sql);
                                     $stm->execute();
                                     $result=$stm->get_result();
                                 ?>
                                 <?php while($row=$result->fetch_assoc()){ ?>
-                                   <input type="hidden" name="doctor_id" value="<?=$row['user_id'];?>">
+                                   <input type="hidden" name="doctor_id" value="<?=$row['admin_id'];?>">
                                 <?php } ?>
                                 <input type="hidden" name="appointement_status" value="On Hold">
                             </div><br>

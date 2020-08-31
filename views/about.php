@@ -163,7 +163,8 @@
             </div>
         </div>
     </section>
-    <!--::review_part end::-->
+<!--::review_part end::-->
+
 <!--::regervation_part start::-->
 <section class="regervation_part">
         <div class="container">
@@ -224,22 +225,19 @@
                                 <div class="form-group col-md-12">
                                     <textarea class="form-control" id="Textarea"  name="message"placeholder="Your Note "></textarea>
                                 </div>
-                                     <?php  
-                                        $con = $conn->connect();
-                                        $sql="SELECT * FROM users WHERE user_status = 'doctor'";
-                                        $stm=$con->prepare($sql);
-                                        $stm->execute();
-                                        $result=$stm->get_result();
-                                    ?>
-                                <select id="doctor_option" class="bg-warning btn-block p-2 " name="doctor_id">
-                                        <option value="Chose a Doctor">Chose a Doctor</option>
-                                    <?php while($row=$result->fetch_assoc()){ ?>
-                                        <option value="<?=$row['user_id'];?>"><?=$row['user_name'];?></option>
-                                    <?php } ?>
-                                </select>
+                                <?php  
+                                    $con = $conn->connect();
+                                    $sql="SELECT * FROM admins WHERE admin_status = 'doctor'";
+                                    $stm=$con->prepare($sql);
+                                    $stm->execute();
+                                    $result=$stm->get_result();
+                                ?>
+                                <?php while($row=$result->fetch_assoc()){ ?>
+                                   <input type="hidden" name="doctor_id" value="<?=$row['admin_id'];?>">
+                                <?php } ?>
                                 <input type="hidden" name="appointement_status" value="On Hold">
                             </div><br>
-                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2" id="make_appointment">make appointmet</button>
+                            <button type="submit" name="make_appointmet"  class="btn btn-block  btn-primary p-2" >make appointmet</button>
                         </form>
 
                         <!-- end -->
@@ -372,12 +370,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../assests/js/jquery.form.js"></script>
     <script src="../assests/js/jquery.validate.min.js"></script>
     <script src="../assests/js/mail-script.js"></script>
-
-    <script>
-       $('#make_appointment').click(function(){
-            $(window).scrollTop(1120);
-       });
-    </script>
 
 </body>
 

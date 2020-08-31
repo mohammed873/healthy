@@ -96,7 +96,7 @@ $conn = new Appointement();
 <!-- profile_card part start-->
     <div class="profile">
        <div class="profile_picture">
-           <img src="<?php echo 'uploads/' . $_SESSION['user_picture']; ?>" alt="profile_pic">
+           <img src="<?php echo '../uploads/' . $_SESSION['user_picture']; ?>" alt="profile_pic">
        </div>
        <h2>Name : <span style="color: blue;"><?php echo $_SESSION['user_name'];?></span></h2>
        <h2>Email : <span style="color: blue;"><?php echo $_SESSION['user_email'];?></span></h2>
@@ -125,13 +125,13 @@ $conn = new Appointement();
                 <strong>
                     <?php
                         $con = $conn->connect();
-                        $sql="SELECT * FROM `users` WHERE user_id = '$doctor_id'";
+                        $sql="SELECT * FROM `admins` WHERE admin_status = 'doctor'";
                         $stm=$con->prepare($sql);
                         $stm->execute();
                         $result=$stm->get_result();
                     ?>
                     <?php while($row=$result->fetch_assoc()){ ?>
-                        <?=$row['user_name'];?>
+                        <?=$row['admin_name'];?>
                     <?php } ?>
                 <strong>
             </span> 
